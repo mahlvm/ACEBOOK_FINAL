@@ -1,7 +1,7 @@
 
 
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
 
 import "./HomePage.css";
 
@@ -9,7 +9,6 @@ export const HomePage = () => {
   return (
 
     <body>
-    
         {/* Left Column */}
         <div className="content-info">
           <h1>Welcome to Acebook!</h1>

@@ -99,3 +99,17 @@ h2{
 .picture:hover {
     background-color: var(--collor-gray2);
 }
+
+.btn-login{
+    background-color: var(--collor-blue);
+    cursor: pointer;
+
+}
+.btn-login:hover{
+    background-color: var(--color-blue2);
+}
+
+hr{
+    width: 100%;
+    border: 1px solid var(--collor-gray2);
+}
