@@ -1,6 +1,9 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from 'react';
+import './CommentForm.css';
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CommentForm = ({ post_id }) => {
@@ -40,19 +43,19 @@ const CommentForm = ({ post_id }) => {
     };
 
     return (
-        <div className="container">
-        {/* <h4>Comments</h4> */}
-        <div className="comments">
-            <form onSubmit={handleSubmit}>
-            <label htmlFor="comment">
-                Comment:
-                <input type="text" onChange={handleChange} data-testid="comment-input" />
-            </label>
-            <label>
-                <input role="submit-button" type="submit" value="Submit Comment" />  
-            </label>
-            </form>
-        </div>
+        <div className="containerComments">
+            <div className="commentBox">
+                <form className="commentForm" onSubmit={handleSubmit}>
+            
+                    <input className="commentFormInput" type="text" onChange={handleChange} data-testid="comment-input" placeholder="Write your comment here" />
+                    <input className="commentSubmit" role="submit-button" type="image" src="src/assets/send.png"  />  
+
+                </form>
+
+            </div>
+
+        
+
         </div>
     );
 };

@@ -93,7 +93,10 @@ const NewPostForm = () => {
   };
 
   return (
+
     <div className="postFormBox">
+
+    
 
 
       <form className="feedForm " onSubmit={handleSubmit}>

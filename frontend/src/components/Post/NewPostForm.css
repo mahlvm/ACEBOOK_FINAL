@@ -11,6 +11,7 @@
     --collor-green2: #36a420;
 }
 
+
 .postFormBox{
     background-color: var(--collor--white);
     border-radius: 8px;
@@ -34,13 +35,16 @@
     width: 40px;
     height: 40px;
     border-radius: 20px;
+    margin-top: -10px;
+    margin-left: 2%;
+    
 }
 
 .postFormInput{
     position: relative;
     top: -8px;
     margin-left: 2%;
-    width: calc(98% - 40px);
+    width: calc(90% - 40px);
     height: 50px;
     background-color: var(--collor-gray);
     border-radius: 20px;
@@ -64,6 +68,7 @@
     padding: 20px 40px;
     display: flex;
     flex-direction: row;
+    margin-left: 7%;
     
 }
 

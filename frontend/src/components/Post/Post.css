@@ -22,18 +22,19 @@
 
 
 .profileIconFeed {
-    display: inline-block;
+    display: flex;
     width: 40px;
     height: 40px;
     border-radius: 20px;
     margin-right: 10px
+    margin: 0px 30px;
+    margin-top: 19px;
 }
 
 
 .profilePhoto{
     display: flex;
-    align-items: flex-start;
-    margin: 10px 30px;
+    margin: 0px 30px;
 }
 
 
@@ -41,13 +42,14 @@
     font-size: 20px;
     color: var(--collor-gray4);
     display: flex;
-    margin: 0;
+    margin: 1px 5px;
 }
 
 .datePost{
     font-size: 15px;
     color: var(--collor-gray4);
     display: flex; 
+    margin: 0px -90px;
 }
 
 .messagePost{
@@ -56,6 +58,7 @@
     display: flex;
     margin: 10px 30px;
     text-align: left;
+    margin-top: -20px;
 }
 
 .actions {
