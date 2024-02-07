@@ -31,9 +31,9 @@ const router = createBrowserRouter([
     element: <AccountPage />
   },
   {
-    path: "/profilepage",
+    path: "/profilepage/:userName",
     element: <ProfilePage />
-  }
+  },
 ]);
 
 const App = () => {

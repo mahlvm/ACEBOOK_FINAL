@@ -77,6 +77,7 @@ import Comment from "./Comment";
 import { ViewCommentButton } from "./ViewCommentButton";
 import LikeButton from "../LikeButton";
 import './Post.css';
+import { getId, getUserDataByUserId } from "../../services/user";
 
 
 export const Post = (props) => {
@@ -90,7 +91,12 @@ export const Post = (props) => {
     setComments(comments)
   }
 
-  
+  const handleClickOnPost = async () => {
+    
+    const data = await getUserDataByUserId(token, props.post.user_id)
+    const user = data.user
+    navigate(`/profilepage/${user.username}`)
+  }
 
   useEffect(() => {
     if (token) {
@@ -122,9 +128,9 @@ export const Post = (props) => {
     <div className="feedPostSingle">
 
         <div className="profilePhoto">
-          <img className="profileIconFeed" src="src/assets/profile.png"/>
+          <img className="profileIconFeed" src="src/assets/profile.png" onClick={handleClickOnPost}/>
           <div className="spanText">
-            <span> UserName </span>
+            <span onClick={handleClickOnPost}> UserName </span>
             <div className="datePost"><h6>{props.date}</h6></div>
           </div>
         </div>
