@@ -84,22 +84,13 @@ export const Post = (props) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [viewComment, setCommentSection] = useState(false);
   const [likes, setLikes] = useState(props.post.likes);
-  const [user, setUser] = useState()
   const navigate = useNavigate();
   const getPostById = (data, post_id) => {
     const comments = data.comments.filter((comment) => comment.post_id == post_id)
     setComments(comments)
   }
 
-  //###################################################
-  // #################################################
-  // Make get user by post path
-
-  const handleClickOnUser = () => {
-    useEffect(() => {
-      
-    })
-  }
+  
 
   useEffect(() => {
     if (token) {
@@ -117,8 +108,6 @@ export const Post = (props) => {
     }
   }, []);
 
-  console.log(props.user_id)
-
   if (!token) {
     return;
   }
@@ -133,9 +122,9 @@ export const Post = (props) => {
     <div className="feedPostSingle">
 
         <div className="profilePhoto">
-          <img className="profileIconFeed" src="src/assets/profile.png" onClick={handleClickOnUser}/>
+          <img className="profileIconFeed" src="src/assets/profile.png"/>
           <div className="spanText">
-            <span onClick={handleClickOnUser}> UserName </span>
+            <span> UserName </span>
             <div className="datePost"><h6>{props.date}</h6></div>
           </div>
         </div>
