@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./SignupPage.css";
 
-import Navbar from "../../components/Navbar/Navbar";
+// import Navbar from "../../components/Navbar/Navbar";
 
 
 import { signup } from "../../services/authentication";
@@ -48,7 +49,7 @@ export const SignupPage = () => {
   return (
 
     <body>
-      
+
       <div className="signup-box">
 
         {/* TITLE */}
@@ -109,6 +110,14 @@ export const SignupPage = () => {
             <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Create!" />
 
         </form>
+
+            {/* BUTTON LOGIN */}
+            <hr />
+            <button className="btn btn-login">
+                <Link to="/login" className="btn">Log In</Link>
+            </button>
+
+
 
             {/* ERROR */}
             {signUpError && <div ><h4 role="invalid-signup">{signUpError}</h4></div>}

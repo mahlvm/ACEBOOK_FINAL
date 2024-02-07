@@ -1,7 +1,9 @@
+
+
 import  { useState, useEffect } from "react";
 import {  Link } from "react-router-dom";
 import './Navbar.css';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import ang from '../../assets/ang_profile.jpeg';
 import { useNavigate } from "react-router-dom";
 
@@ -40,8 +42,7 @@ export const Navbar = () => {
 
 
     return (
-        <body>
-
+    
         <div className="nav-box">
 
             <nav className="navbar-header">
@@ -51,9 +52,9 @@ export const Navbar = () => {
                 <div className="left-header">
 
                     {/* ACEBOOK NAME/LOGO */}
-                    <button className="logo-home">
-                        <Link to='/'>Acebook</Link>
-                    </button>
+        
+                        <Link className="logo-home" to='/'>Acebook</Link>
+                
 
                     {/* GREETING */}
                     <div className="user-greeting" data-testid="user-greeting">
@@ -66,28 +67,20 @@ export const Navbar = () => {
                 <div className="right-header">
 
                     {/* BUTTONS */}
-                    <button className="btn btn-profile" type="button">
-                        <Link to='/profilepage'>Profile</Link>
-                    </button>
+                
+                    <Link className="btnHeader-profile" to='/profilepage'>Profile</Link>
+                    
+                    <Link className="btnHeader-account" to='/accountpage'>Account</Link>
 
-                    <button className="btn btn-account" type="button">
-                        <Link to='/accountpage'>Account</Link>
-                    </button>
-
-                    <button className="btn btn-logout" type="button">
-                        <Link to='/' onClick={logout}>Logout</Link>
-                    </button>
-
+                    <Link className="btnHeader-logout" to='/'>Logout</Link>
+                
                     {/* PICTURE */}
-                    <div className="photo-profile">
                         <img
                             src={ user.profile_picture || ang }
-                            alt="Profile Picture"
-                            className="img-thumbnail"
+                            className="photo-profile"
                             style={{ maxWidth: '15%' }}
                             onClick={handleDropdownToggle}
                         />
-                    </div>
                     
                     {/* ?? */}
                     <div
@@ -95,14 +88,11 @@ export const Navbar = () => {
                         aria-labelledby="navbarDropdown"
                     >
                     </div>
-
-
                     
                 </div>    
             </nav>
         </div>
 
-    </body>
     );
 };
 

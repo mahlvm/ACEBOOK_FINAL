@@ -1,0 +1,30 @@
+:root{
+    --collor--white: white;
+    --collor-gray: #f0f2f5;
+    --collor-gray2: #dddfe2;
+    --collor-gray3: #4242437b;
+    --collor-gray4: #4c4c4c;
+    --collor-dark: #1d2129;
+    --collor-blue: #1b74e4;
+    --color-blue2: #1268d9;
+    --collor-green: #42b72a;
+    --collor-green2: #36a420;
+}
+
+.likeContainer span{
+    font-size: 20px;
+    color: var(--collor-gray4);
+    margin: 10px 5px;
+}
+.likeContainer {
+    display: flex; /* Define um layout flexível */
+    align-items: center; /* Alinha os itens verticalmente */
+}
+
+.likeContainer input {
+    margin-right: 5px; /* Adiciona uma margem direita entre a imagem e o span */
+}
+
+.likeContainer span {
+    align-self: center; /* Alinha o span verticalmente ao centro */
+}
