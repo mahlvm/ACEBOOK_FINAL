@@ -45,7 +45,7 @@ export const FeedPage = () => {
   return (
     <>
       <Navbar />
-      <h2>Posts</h2>
+      {/* <h2>Posts</h2> */}
       <NewPostForm role="new-post"/>
       <div className="feed" role="feed">
         {posts.toReversed().map((post) => (

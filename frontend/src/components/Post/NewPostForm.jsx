@@ -99,7 +99,7 @@ const NewPostForm = () => {
       <form className="feedForm " onSubmit={handleSubmit}>
 
           <div className="boxText">
-            <img className="profileIcon" src="src/assets/profile.png" alt="Descrição da imagem" />
+            <img className="profileIcon" src="src/assets/profile.png"/>
             <input className="postFormInput" type="text" onChange={handleChange} data-testid="post-input" placeholder="Say Hello!" />
           </div>
 
@@ -108,17 +108,17 @@ const NewPostForm = () => {
           <div className="imageIcon">
 
             <div className="iconSingle">
-            <img className="videoIcon" src="src/assets/video-stream.png" alt="Descrição da imagem" />
+            <img className="videoIcon" src="src/assets/video-stream.png"/>
             <span>Live Video</span>
             </div>
 
             <div className="iconSingle">
-            <img className="photoIcon" src="src/assets/photos.png" alt="Descrição da imagem" />
+            <img className="photoIcon" src="src/assets/photos.png" />
             <span>Picture</span>
             </div>
 
             <div className="iconSingle">
-            <img className="feelingsIcon" src="src/assets/facebook-reactions.png" alt="Descrição da imagem" />
+            <img className="feelingsIcon" src="src/assets/facebook-reactions.png"/>
             <span>Feelings</span>
             </div>
             

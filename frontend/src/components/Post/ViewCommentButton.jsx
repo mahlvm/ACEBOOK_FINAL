@@ -1,3 +1,4 @@
+import './ViewCommentButton.css';
 export const ViewCommentButton = (props) => {
 
     const handleClick = (event) => {
@@ -7,7 +8,7 @@ export const ViewCommentButton = (props) => {
 
     return (
         <div>
-            <button type="button" onClick={handleClick}>View comments</button>
+            <button className="commentButton" type="button" onClick={handleClick}>Comments</button>
         </div>
     )
 }
