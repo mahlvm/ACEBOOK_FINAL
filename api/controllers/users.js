@@ -35,7 +35,12 @@ const getId = async (req, res) => {
 const getAllUserInfo = async (req, res) => {
   try {
 
+    if (req.body) {
+
+    } else {
     const user = await User.findById(req.user_id);
+    }
+
 
     const token = generateToken(req.user_id);
     res.status(200).json({user : user, token: token });
