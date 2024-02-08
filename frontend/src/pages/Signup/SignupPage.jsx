@@ -3,26 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "./SignupPage.css";
-
-// import Navbar from "../../components/Navbar/Navbar";
-
-
 import { signup } from "../../services/authentication";
+import { updateImage } from "../../services/updateUser";
+import { login } from "../../services/authentication";
 
 export const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profile_picture, setProfilePicture] = useState("")
-  const [signUpError, setError] = useState()
+  const [profile_picture, setProfilePicture] = useState();
+
+  const [signUpError, setError] = useState();
+  const [imageURL, setImageURL] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await signup(username, email, password, profile_picture);
+      await signup(username, email, password, profile_picture)
+      .then(updateImage(profile_picture))
+      const token = await login(email, password);
+      window.localStorage.setItem("token", token);
       console.log("redirecting...:");
-      navigate("/login");
+      navigate("/posts");
+ 
     } catch (err) {
       console.error(err);
       setError(err.cause)
@@ -43,7 +47,9 @@ export const SignupPage = () => {
   };
 
   const handleProfilePictureChange = (event) => {
-    setProfilePicture(event.target.value);
+    const file = event.target.files[0];
+    setProfilePicture(file);
+    setImageURL(URL.createObjectURL(file));
   };
 
   return (
@@ -56,7 +62,7 @@ export const SignupPage = () => {
         <h2>Create Account</h2>
 
         {/* FORM */}
-        <form className="content-signup" onSubmit={handleSubmit}>
+        <form className="content-signup" action='/upload' encType="multipart/form-data" onSubmit={handleSubmit}>
 
           {/* USERNAME FORM */}
           {/* <label htmlFor="username">Username:</label> */}
@@ -65,7 +71,7 @@ export const SignupPage = () => {
               placeholder="Username"
               id="username"
               type="text"
-              value={username}
+              // value={username}
               onChange={handleUsernameChange}
             />
 
@@ -76,7 +82,8 @@ export const SignupPage = () => {
               placeholder="Email"
               id="email"
               type="email"
-              value={email}
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+              // value={email}
               onChange={handleEmailChange}
             />
 
@@ -88,7 +95,9 @@ export const SignupPage = () => {
               id="password"
               type="password"
               minLength="8"
-              value={password}
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
+              // value={password}
               onChange={handlePasswordChange}
             />
 
@@ -98,11 +107,14 @@ export const SignupPage = () => {
               <input
                 id="profile_picture"
                 type="file"
-                value={profile_picture}
+                name="profile_picture"
                 onChange={handleProfilePictureChange}
                 style={{ display: 'none' }}
               />
+              
               Upload Profile Picture
+              {<img className="input-image" src={imageURL}/>}
+
             </label>
             
 

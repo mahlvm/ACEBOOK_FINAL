@@ -17,5 +17,47 @@ export const getAllUserInfo = async (token) => {
     }
     
     const data = await response.json();
+    console.log("data")
+
     return data;
-}
+
+};
+
+export const getId = async (token) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  
+    const response = await fetch(`${BACKEND_URL}/users/id`, requestOptions);
+  
+    if (response.status !== 200) {
+      throw new Error("Unable to fetch user id");
+    }
+  
+    const data = await response.json();
+    return data;
+  }
+
+
+export const updateUsersLike = async (token, post_id, status) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ post_id: post_id, status: status }),
+    }
+
+    const response = await fetch(`${BACKEND_URL}/users/like`, requestOptions);
+
+    if (response.status !== 200) {
+        throw new Error("Unable to add post to user like list");
+    }
+
+    // const data = await response.json()
+    // return data;
+};

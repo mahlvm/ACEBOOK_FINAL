@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getComment } from "../../services/comment";
+import { getComment } from "../../services/comments";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import { ViewCommentButton } from "./ViewCommentButton";

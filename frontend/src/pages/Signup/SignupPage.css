@@ -58,6 +58,10 @@ h2{
     box-shadow: 0 0 0 2px, color var(--color-blue2)
 }
 
+.input-image {
+    max-width: 100px;
+}
+
 .btn{
     padding: 15px;
     border: none;

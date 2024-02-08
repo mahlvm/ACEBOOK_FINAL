@@ -5,6 +5,7 @@ import {  Link } from "react-router-dom";
 import './Navbar.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 import ang from '../../assets/ang_profile.jpeg';
+import { useNavigate } from "react-router-dom";
 
 import { getAllUserInfo } from "../../services/user"
 
@@ -17,25 +18,45 @@ export const Navbar = () => {
 
     const [user, setUser] = useState([]);
     const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [profilePicture, setProfilePicture] = useState();
 
     useEffect(() => {
         if (token) {
             getAllUserInfo(token)
                 .then((data) => {
                 setUser(data.user);
-                console.log(data.user)
                 setToken(data.token);
                 window.localStorage.setItem("token", data.token);
+                if (data.user.profile_picture) {
+                    fetchImage(data.user.profile_picture);
+                }
                 })
         .catch((err) => {
-            console.err(err);
+            console.error(err);
             console.log(err)
             });
         }
     }, []);
+    
+    const fetchImage = async (imageName) => {
+        try {
+            // this makes a request to the server to fetch the image
+            const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+            const blob = await response.blob();
+            setProfilePicture(URL.createObjectURL(blob));
+        } catch (error) {
+            console.error('Error fetching image:', error);
+        }
+    };
+    
+    const logout = () => {
+        window.localStorage.removeItem("token");
+        useNavigate('/');
+    }
 
 
     return (
+
     
         // <div className="nav-box">
 
@@ -49,7 +70,7 @@ export const Navbar = () => {
                     <div className="buttons">
                     <Link className="btnHeader-profile" to='/profilepage'>Profile</Link>
                     <Link className="btnHeader-account" to='/accountpage'>Account</Link>
-                    <Link className="btnHeader-logout" to='/'>Logout</Link>
+                    <Link className="btnHeader-logout" to='/' onClick={logout}>Logout</Link>
                     </div>
                 </div>
 
@@ -68,9 +89,9 @@ export const Navbar = () => {
         // </div>
 
 
+
     );
 };
-
 
 export default Navbar;
 

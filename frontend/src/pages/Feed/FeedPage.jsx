@@ -21,6 +21,7 @@ export const FeedPage = () => {
       })
     }
   }, []);
+
   
   useEffect(() => {
     if (token) {

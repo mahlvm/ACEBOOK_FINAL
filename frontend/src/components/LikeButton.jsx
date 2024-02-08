@@ -2,7 +2,11 @@
 
 
 import { useState } from "react";
+
 import './LikeButton.css';
+
+import { updateUsersLike } from "../services/user";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
@@ -18,9 +22,11 @@ const LikeButton = (props) => {
     if (likeList.indexOf(props.user_id) === -1) {
       setNumberOfLikes(numberOfLikes + 1);
       likeList.push(props.user_id);
+      updateUsersLike(token, props.post._id, "like");
     } else {
       setNumberOfLikes(numberOfLikes - 1);
       likeList.splice(likeList.indexOf(props.user_id), 1);
+      updateUsersLike(token, props.post._id, "unlike");
     }
     fetch(`${BACKEND_URL}/posts/like`, {
       method: "POST",
