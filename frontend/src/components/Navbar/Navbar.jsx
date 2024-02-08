@@ -3,8 +3,8 @@
 import  { useState, useEffect } from "react";
 import {  Link } from "react-router-dom";
 import './Navbar.css';
-// import 'bootstrap/dist/css/bootstrap.css';
-import ang from '../../assets/ang_profile.jpeg';
+import 'bootstrap/dist/css/bootstrap.css';
+// import ang from '../../assets/ang_profile.jpeg';
 import { useNavigate } from "react-router-dom";
 
 import { getAllUserInfo } from "../../services/user"
@@ -78,7 +78,7 @@ export const Navbar = () => {
                     <div className="user-greeting" data-testid="user-greeting">
                         Hi {user.username || "You"}  
                     </div>
-                    <img src={ user.profile_picture || ang } className="photo-profile" style={{ maxWidth: '15%' }} onClick={handleDropdownToggle}/>
+                    <img src={profilePicture} className="photo-profile" style={{ maxWidth: '15%' }} onClick={handleDropdownToggle}/>
                     <div
                         className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
                         aria-labelledby="navbarDropdown">

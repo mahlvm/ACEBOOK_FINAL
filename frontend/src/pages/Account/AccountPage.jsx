@@ -38,9 +38,9 @@ export const AccountPage = () => {
         event.preventDefault();
             try {
                 await updateUserInfo(username, email, password, profile_picture, token)
-                .then(updateImage(profile_picture))
-                console.log("Details updated!");
-                navigate("/profilepage")
+                    .then(updateImage(profile_picture))
+                    console.log("Details updated!");
+                    navigate("/profilepage")
             } catch (err) {
                 console.error(err);
             }
@@ -73,11 +73,12 @@ export const AccountPage = () => {
                 {/* TITLE */}
                 <h2>Update your account details</h2>
             
+            <div className="form-input-boxes">
             {/* FORM */}
             <form className="content-signup" encType="multipart/form-data" onSubmit={handleSubmit}>
-
+            
                  {/* USERNAME FORM */}
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Username</label> 
                     <input
                         className="input-sg"
                         id="username"
@@ -87,7 +88,7 @@ export const AccountPage = () => {
                     />
 
                     {/* EMAIL FORM */}
-                    <label htmlFor="email">Email:</label>   
+                    <label htmlFor="email">Email</label> 
                     <input
                         className="input-sg"
                         id="email"
@@ -98,7 +99,7 @@ export const AccountPage = () => {
                     />
 
                     {/* PASSWORD FORM */}
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">Password</label> 
                     <input
                         className="input-sg"
                         id="password"
@@ -112,7 +113,7 @@ export const AccountPage = () => {
 
                     {/* PICTURE FORM */}
                     {/* <label className="label-picture"  htmlFor="profile_picture">Add Profile Picture:</label> */}
-                    <label className="picture" htmlFor="profile_picture">
+                    <label className="picture" htmlFor="profile_picture"> 
                         <input
                             id="profile_picture"
                             type="file"
@@ -121,14 +122,14 @@ export const AccountPage = () => {
                             style={{ display: 'none' }}
                         />
                         Upload Profile Picture
-                        {<img className="update-image" src={imageURL}/>}
                         
                     </label>
+                    <img className="update-image" src={imageURL}/>
 
                      {/* BUTTON SUBMIT */}
-                    <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Update!" />
-
+                    <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Save Changes" />
                 </form>
+                </div>
             <div/>
         </div>
     </>

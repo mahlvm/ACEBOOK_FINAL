@@ -20,19 +20,18 @@
 }
 
 
-
 .profileIconFeed {
     display: flex;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-top: 19px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 15px;
 }
 
 
 .profilePhoto{
     display: flex;
-    margin: 0px 22px;
+    margin: -5px 20px;
 }
 
 
@@ -40,7 +39,7 @@
     font-size: 20px;
     color: var(--collor-gray4);
     display: flex;
-    margin: 1px 5px;
+    margin: 1px 20px;
 }
 
 
@@ -48,16 +47,21 @@
     font-size: 18px;
     color: var(--collor-gray4);
     display: flex;
-    text-align: left;
+    margin: 5px 14px;
 }
 
 .datePost{
-    margin: 23px -83px;
+    margin: 31px -83px;
     font-size: 12px;
     color: var(--collor-gray3);
     font-weight: bold;
     display: flex; 
 
+}
+
+.username-date-added{
+    display: flex;
+    margin: 10px 10px;
 }
 
 .messagePost{
@@ -80,5 +84,10 @@
 }
 
 
-
-
+.post-image {
+    display: center;
+    border-radius: 5px;
+    width: 500px;
+    padding: 5px;
+    padding-top: 10px;
+}

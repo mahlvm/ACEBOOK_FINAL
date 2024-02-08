@@ -42,7 +42,7 @@ export const updateImage = async (profile_picture) => {
         }
     console.log(formData)
 
-    const response = await fetch(`${BACKEND_URL}/upload`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/upload/profile`, requestOptions);
 
     if (response.status !== 200) {
         // If profile picture upload fails, throw an error

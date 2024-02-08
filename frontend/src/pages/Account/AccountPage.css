@@ -1,5 +1,6 @@
 .update-image {
     max-width: 175px;
+    margin-left: 20px;
 }
 
 .update-account-box{
@@ -8,20 +9,20 @@
     flex-direction: column;
     align-items: stretch;
     gap: 1.5rem;
-    padding: 1rem; 
+    padding: 5rem; 
     max-width: 900px;
-    margin: 0 auto; 
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Adjust styling for input boxes */
+
 .update-account-box input[type="text"],
 .update-account-box input[type="email"],
 .update-account-box input[type="password"] {
-    width: 90%; /* Ensure input boxes fill the container width */
-    padding: 1rem; /* Adjust padding as needed */
-    border: 1px solid #ccc; /* Add border to input boxes */
-    border-radius: 4px; /* Add border radius to input boxes */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%; 
+    padding: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
 }
+

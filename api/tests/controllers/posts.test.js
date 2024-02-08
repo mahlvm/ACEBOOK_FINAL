@@ -118,8 +118,8 @@ describe("/posts", () => {
     });
 
     test("returns every post in the collection", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({ message: "howdy!", image:"appa.jpeg" });
+      const post2 = new Post({ message: "hola!", image:"ang.jpeg" });
       await post1.save();
       await post2.save();
 
@@ -132,7 +132,10 @@ describe("/posts", () => {
       const secondPost = posts[1];
 
       expect(firstPost.message).toEqual("howdy!");
+      expect(firstPost.image).toEqual("appa.jpeg")
+      
       expect(secondPost.message).toEqual("hola!");
+      expect(secondPost.image).toEqual("ang.jpeg")
     });
 
     test("returns a new token", async () => {
@@ -167,8 +170,8 @@ describe("/posts", () => {
     });
 
     test("returns no posts", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({ message: "howdy!", image:"appa.jpeg" });
+      const post2 = new Post({ message: "hola!", image:"ang.jpeg" });
       await post1.save();
       await post2.save();
 
@@ -178,8 +181,8 @@ describe("/posts", () => {
     });
 
     test("does not return a new token", async () => {
-      const post1 = new Post({ message: "howdy!" });
-      const post2 = new Post({ message: "hola!" });
+      const post1 = new Post({ message: "howdy!", image:"appa.jpeg" });
+      const post2 = new Post({ message: "hola!", image:"ang.jpeg" });
       await post1.save();
       await post2.save();
 

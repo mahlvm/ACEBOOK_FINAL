@@ -73,7 +73,7 @@ export const SignupPage = () => {
               type="text"
               // value={username}
               onChange={handleUsernameChange}
-            />
+            required />
 
             {/* EMAIL FORM */}
             {/* <label htmlFor="email">Email:</label> */}
@@ -85,7 +85,7 @@ export const SignupPage = () => {
               pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               // value={email}
               onChange={handleEmailChange}
-            />
+            required />
 
             {/* PASSWORD FORM */}
             {/* <label htmlFor="password">Password:</label> */}
@@ -99,7 +99,7 @@ export const SignupPage = () => {
               title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
               // value={password}
               onChange={handlePasswordChange}
-            />
+            required />
 
             {/* PICTURE FORM */}
             {/* <label className="label-picture"  htmlFor="profile_picture">Add Profile Picture:</label> */}
@@ -113,10 +113,12 @@ export const SignupPage = () => {
               />
               
               Upload Profile Picture
-              {<img className="input-image" src={imageURL}/>}
 
             </label>
             
+            <div className="signup-image">
+              <img className="input-image-signup" src={imageURL}/>
+            </div>
 
             {/* BUTTON SUBMIT */}
             <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Create!" />
