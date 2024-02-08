@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./SignupPage.css";
 import { signup } from "../../services/authentication";
@@ -53,8 +54,8 @@ export const SignupPage = () => {
 
   return (
 
-    <body>
-      
+    <>
+
       <div className="signup-box">
 
         {/* TITLE */}
@@ -122,12 +123,20 @@ export const SignupPage = () => {
 
         </form>
 
+            {/* BUTTON LOGIN */}
+            <hr />
+            <button className="btn btn-login">
+                <Link to="/login" className="btn">Log In</Link>
+            </button>
+
+
+
             {/* ERROR */}
             {signUpError && <div ><h4 role="invalid-signup">{signUpError}</h4></div>}
 
 
       </div>
-    </body>
+    </>
 
   );
 };

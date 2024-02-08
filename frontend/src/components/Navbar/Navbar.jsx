@@ -1,7 +1,9 @@
+
+
 import  { useState, useEffect } from "react";
 import {  Link } from "react-router-dom";
 import './Navbar.css';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 // import ang from '../../assets/ang_profile.jpeg';
 import { useNavigate } from "react-router-dom";
 
@@ -54,69 +56,40 @@ export const Navbar = () => {
 
 
     return (
-        <body>
 
-        <div className="nav-box">
+    
+        // <div className="nav-box">
 
             <nav className="navbar-header">
 
-
-                {/* LEFT INFO */}
                 <div className="left-header">
+                    <div className="logo">
+                        <Link className="logo-home" to='/'>Acebook</Link>
+                    </div>
+            
+                    <div className="buttons">
+                    <Link className="btnHeader-profile" to='/profilepage'>Profile</Link>
+                    <Link className="btnHeader-account" to='/accountpage'>Account</Link>
+                    <Link className="btnHeader-logout" to='/' onClick={logout}>Logout</Link>
+                    </div>
+                </div>
 
-                    {/* ACEBOOK NAME/LOGO */}
-                    <button className="logo-home">
-                        <Link to='/'>Acebook</Link>
-                    </button>
-
-                    {/* GREETING */}
+                <div className="right-header">
                     <div className="user-greeting" data-testid="user-greeting">
                         Hi {user.username || "You"}  
                     </div>
-
-                </div>
-
-                {/* RIGHT INFO  */}
-                <div className="right-header">
-
-                    {/* BUTTONS */}
-                    <button className="btn btn-profile" type="button">
-                        <Link to='/profilepage'>Profile</Link>
-                    </button>
-
-                    <button className="btn btn-account" type="button">
-                        <Link to='/accountpage'>Account</Link>
-                    </button>
-
-                    <button className="btn btn-logout" type="button">
-                        <Link to='/' onClick={logout}>Logout</Link>
-                    </button>
-
-                    {/* PICTURE */}
-                    <div className="photo-profile">
-                        <img
-                            src={profilePicture}
-                            alt="Profile Picture"
-                            className="img-thumbnail"
-                            style={{ maxWidth: '15%' }}
-                            onClick={handleDropdownToggle}
-                        />
-                    </div>
-                    
-                    {/* ?? */}
+                    <img src={ user.profile_picture || ang } className="photo-profile" style={{ maxWidth: '15%' }} onClick={handleDropdownToggle}/>
                     <div
                         className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
-                        aria-labelledby="navbarDropdown"
-                    >
+                        aria-labelledby="navbarDropdown">
                     </div>
-
-
-                    
-                </div>    
+                </div>  
+    
             </nav>
-        </div>
+        // </div>
 
-    </body>
+
+
     );
 };
 

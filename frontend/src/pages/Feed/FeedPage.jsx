@@ -43,19 +43,29 @@ export const FeedPage = () => {
     return;
   }
 
+  
+
   return (
     <>
-      <Navbar />
-      <h2>Posts</h2>
-      <NewPostForm role="new-post"/>
-      <div className="feed" role="feed">
-        {posts.toReversed().map((post) => (
-          <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} image={post.image}/>
-        ))}
+      <div className="header">
+        <Navbar />
       </div>
-      <div className="credits">
-      <a href="https://www.flaticon.com/free-icons/heart">Heart icons created by Freepik - Flaticon</a>
+
+      <div className="bodyFeed">
+        <NewPostForm role="new-post"/>
+        <div className="feedPost" role="feed">
+          {posts.toReversed().map((post) => (
+            <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} image={post.image}/>
+            ))}
+        </div>
+
+        <div className="credits">
+          <a href="https://www.flaticon.com/free-icons/heart"></a>
+        </div>
+
       </div>
+      
+
     </>
   );
 };
