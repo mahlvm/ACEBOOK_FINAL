@@ -5,7 +5,7 @@ const create = async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const profile_picture = req.body.profile_picture || null;
+  const profile_picture = req.body.profile_picture || null ;
 
   //checks if the email is already in use
   const existingUser = await User.findOne({ email: email });
@@ -15,7 +15,7 @@ const create = async (req, res) => {
   } 
   // creates a new user if the email is not in use 
   else {
-    const newUser = new User({ username, email, password, profile_picture });
+    const newUser = new User({ username, email, password, profile_picture});
     newUser
       .save()
       .then((user) => {
@@ -42,10 +42,35 @@ const getAllUserInfo = async (req, res) => {
   } 
   catch (error) {
     console.log(error)
-    console.log("bad call")
     return res.status(404).json({ message: 'User not found' })
   }
 };
+
+const updateUserInfo = async (req, res) => {
+    updatedData = {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      profile_picture: req.body.profile_picture || null,
+      };
+      
+    const user = await User.findById(req.user_id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found', code: 2 });
+    }
+    // evaluates whether any of the inputs have been updated and defaults
+    // to the saved value if not/
+    user.username = updatedData.username || user.username;
+    user.email = updatedData.email || user.email;
+    user.password = updatedData.password || user.password;
+    user.profile_picture = updatedData.profile_picture || user.profile_picture;
+    
+    await user.save();
+
+    const token = generateToken(req.user_id);
+    return res.status(200).json({message: "User updated", user, token});
+  };
 
 const updateUsersLikedPost = async (req, res) => {
   const liked_post_id = req.body.post_id
@@ -77,13 +102,14 @@ const clearTestData = async () => {
   await User.deleteMany({})
 }
 
-
 const UsersController = {
   create: create,
   getId: getId,
   getAllUserInfo: getAllUserInfo, 
+  updateUserInfo: updateUserInfo,
   clearTestData: clearTestData,
   updateUsersLikedPost: updateUsersLikedPost
 };
+
 
 module.exports = UsersController;
