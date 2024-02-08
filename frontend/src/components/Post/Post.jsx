@@ -85,21 +85,34 @@ export const Post = (props) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [viewComment, setCommentSection] = useState(false);
   const [likes, setLikes] = useState(props.post.likes);
+  const [username, setUsername] = useState()
   const navigate = useNavigate();
   const getPostById = (data, post_id) => {
     const comments = data.comments.filter((comment) => comment.post_id == post_id)
     setComments(comments)
   }
+  // console.log(props.post)
 
   const handleClickOnPost = async () => {
     
     const data = await getUserDataByUserId(token, props.post.user_id)
     const user = data.user
-    navigate(`/profilepage/${user.username}`)
+    // console.log("user343")
+
+    // console.log(user)
+    navigate(`/profilepage/${user.username}`, 
+    {state: {username: user.username, profile_picture: user.profile_picture, liked_posts: user.liked_posts}})
   }
 
   useEffect(() => {
     if (token) {
+      getUserDataByUserId(token, props.post.user_id)
+        .then((data) => {
+          console.log(data)
+          setUsername(data.user.username)
+        })
+
+
       getComment(token)
         .then((data) => {
           getPostById(data, props.post._id)
@@ -130,7 +143,7 @@ export const Post = (props) => {
         <div className="profilePhoto">
           <img className="profileIconFeed" src="src/assets/profile.png" onClick={handleClickOnPost}/>
           <div className="spanText">
-            <span onClick={handleClickOnPost}> UserName </span>
+            <span onClick={handleClickOnPost}> {username} </span>
             <div className="datePost"><h6>{props.date}</h6></div>
           </div>
         </div>
