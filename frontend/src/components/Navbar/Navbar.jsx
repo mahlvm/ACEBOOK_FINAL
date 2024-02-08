@@ -64,7 +64,7 @@ export const Navbar = () => {
 
                 <div className="left-header">
                     <div className="logo">
-                        <Link className="logo-home" to='/'>Acebook</Link>
+                        <Link className="logo-home" to='/posts'>Acebook</Link>
                     </div>
             
                     <div className="buttons">
