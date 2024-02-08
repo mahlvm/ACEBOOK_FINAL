@@ -35,7 +35,7 @@ export const LoginPage = () => {
 
   return (
 
-    <body>
+    <>
 
       <div className="login-box">
         {/* TITULO */}
@@ -75,7 +75,7 @@ export const LoginPage = () => {
 
     
 
-    </body>
+    </>
 
   );
 };
