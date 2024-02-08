@@ -58,7 +58,6 @@ export const FeedPage = () => {
             <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} image={post.image}/>
             ))}
         </div>
-
         <div className="credits">
           <a href="https://www.flaticon.com/free-icons/heart"></a>
         </div>

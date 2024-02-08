@@ -70,9 +70,13 @@ const NewPostForm = () => {
             </div>
 
             <div className="iconSingle">
+            <label>
             <img className="photoIcon" src="src/assets/photos.png" />
+            <input className="postFormImageinput" type= "file" onChange={handleImageChange} style={{ display: "none" }} name='image' />
             <span>Picture</span>
+            </label>
             </div>
+          
 
             <div className="iconSingle">
             <img className="feelingsIcon" src="src/assets/facebook-reactions.png"/>
