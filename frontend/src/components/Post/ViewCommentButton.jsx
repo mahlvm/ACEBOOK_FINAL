@@ -7,7 +7,7 @@ export const ViewCommentButton = (props) => {
     }
 
     return (
-        <div>
+        <div className='boxButtonComment'>
             <button className="commentButton" type="button" onClick={handleClick}>Comments</button>
         </div>
     )

@@ -48,7 +48,7 @@ export const SignupPage = () => {
 
   return (
 
-    <body>
+    <>
 
       <div className="signup-box">
 
@@ -124,7 +124,7 @@ export const SignupPage = () => {
 
 
       </div>
-    </body>
+    </>
 
   );
 };

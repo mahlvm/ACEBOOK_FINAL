@@ -48,7 +48,7 @@
     height: 50px;
     background-color: var(--collor-gray);
     border-radius: 20px;
-    padding-left: 20px;
+    padding-left: 15px;
     font-size: 15px;
     border: 0;
 }
@@ -91,7 +91,8 @@
     background-color: var(--collor-blue);
     color: var(--collor--white);
     border-radius: 5px;
-    width: 90%;
+    width: 94%;
     font-size: 1.1rem;
     transition: .2s;
+
 }

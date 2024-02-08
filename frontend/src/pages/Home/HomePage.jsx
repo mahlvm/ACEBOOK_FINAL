@@ -8,7 +8,7 @@ import "./HomePage.css";
 export const HomePage = () => {
   return (
 
-    <body>
+    <>
         {/* Left Column */}
         <div className="content-info">
           <h1>Welcome to Acebook!</h1>
@@ -34,7 +34,7 @@ export const HomePage = () => {
 
 
 
-    </body>
+    </>
 
   );
 };

@@ -7,13 +7,18 @@ const Comments = (props) => {
     <br/>
         <div className='boxComment'>
 
-        <p className="messageComment">
-            <article key={props.comment._id}>{props.comment.message}</article>
-        </p>
+            <div className='commentSpace'>
 
-        <p className="dateComment">
-            <h6><div>{props.date}</div></h6>
-        </p>
+
+                <p className="messageComment">
+                    <span key={props.comment._id}>{props.comment.message}</span>
+                </p>
+
+                <p className="dateComment">
+                    <span>{props.date}</span>
+                </p>
+                
+            </div>
 
         </div>
     </>

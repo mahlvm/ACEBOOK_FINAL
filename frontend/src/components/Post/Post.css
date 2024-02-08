@@ -26,15 +26,13 @@
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    margin-right: 10px
-    margin: 0px 30px;
     margin-top: 19px;
 }
 
 
 .profilePhoto{
     display: flex;
-    margin: 0px 30px;
+    margin: 0px 22px;
 }
 
 
@@ -45,20 +43,29 @@
     margin: 1px 5px;
 }
 
-.datePost{
-    font-size: 15px;
+
+.userName{
+    font-size: 18px;
     color: var(--collor-gray4);
+    display: flex;
+    text-align: left;
+}
+
+.datePost{
+    margin: 23px -83px;
+    font-size: 12px;
+    color: var(--collor-gray3);
+    font-weight: bold;
     display: flex; 
-    margin: 0px -90px;
+
 }
 
 .messagePost{
     font-size: 18px;
     color: var(--collor-gray4);
     display: flex;
-    margin: 10px 30px;
     text-align: left;
-    margin-top: -20px;
+    margin: 0px 27px;
 }
 
 .actions {
