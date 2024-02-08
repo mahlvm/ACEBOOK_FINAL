@@ -1,13 +1,13 @@
-// import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getPosts } from "../../services/posts.js";
 import { getId } from "../../services/users.js";
 import "./ProfilePage.css";
 import Post from "../../components/Post/Post.jsx";
 import ProfileFeedSelector from "../../components/Profile/ProfileFeedSelector.jsx";
-import { getAllUserInfo } from "../../services/user.js";
+import { getAllUserInfo, getUserDataByUserId } from "../../services/user.js";
 
 
 
@@ -15,8 +15,9 @@ export const ProfilePage = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userId, setUserId] = useState('');
   const [posts, setPosts] = useState([]);
-  let [feed, setFeed] = useState("Posts")
+  let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
 
 
@@ -26,9 +27,8 @@ export const ProfilePage = () => {
     return posts.filter((post) => post.user_id == userId)
   }
 
-  const getLikedPosts = async (posts) => {
-    // getUserLikeList()
-    const data = await getAllUserInfo(token);
+  const getLikedPosts = async (posts, user_id) => {
+    const data = await getUserDataByUserId(token, user_id);
     const user_liked_list = data.user.liked_posts
     console.log(posts)
 
@@ -39,33 +39,31 @@ export const ProfilePage = () => {
     if (token) {
       getId(token)
       .then((data) => {
-        // console.log(data.user_id)
-        setUserId(data.user_id)
-        return data.user_id
+        let user_data = ""
+        if (state) {
+          user_data = state.visiting_user_id
+          setUserId(state.visiting_user_id)
+        } else {
+          user_data = data.user_id
+          setUserId(data.user_id)
+        }
+        return user_data
       })
-      .then((userId) => {
+      .then((currentPageUserId) => {
         getPosts(token)
           .then((data) => {
             
             setToken(data.token);
-            console.log(feed)
-            // console.log(data)
-            console.log(data.posts)
 
             if (feed == "Posts") {
-              let usersPosts = getUsersPosts(data.posts, userId);
+              let usersPosts = getUsersPosts(data.posts, currentPageUserId);
               console.log(usersPosts)
               setPosts(usersPosts);
-              console.log("hdhw")
-              console.log(posts)
             } else if (feed == "Liked") {
-              getLikedPosts(data.posts)
+              getLikedPosts(data.posts, currentPageUserId)
               .then((likedPosts) => {console.log(likedPosts)
               setPosts(likedPosts)
-              console.log("hdhw")
               });
-
-              
             }
             
             window.localStorage.setItem("token", data.token);
@@ -79,7 +77,7 @@ export const ProfilePage = () => {
     } else {
       navigate("/login")
     }
-  }, [feed])
+  }, [feed, userId])
 
   if(!token) {
     return;
@@ -89,7 +87,6 @@ export const ProfilePage = () => {
     <div className="profilepage">
       <Navbar />
         <h1>This is your profile!</h1>
-        {/* profile nave bar - (posts, liked_posts) */}
         <ProfileFeedSelector feed={feed} setFeed={setFeed}/>
         <div className="feed" role="feed">
         {posts.toReversed().map((post) => (
