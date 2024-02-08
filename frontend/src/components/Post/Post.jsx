@@ -100,14 +100,17 @@ export const Post = (props) => {
 
       <div className="profilePhoto">
         <img className="profileIconFeed" src={profilePicture}/>
+      <div/>
+
+      <div className="username-date-added">
       <div className="spanText">
-        <p>
-          <span className="userName"> {user.username} </span>
-        </p>
-        <p>
-          <span className="datePost"> {props.date} </span>
-        </p>
         
+          <span className="userName"> {user.username} </span>
+        
+        
+          <span className="datePost"> {props.date} </span>
+        
+        </div>
       </div>
 
     </div>

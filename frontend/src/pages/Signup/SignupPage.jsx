@@ -113,10 +113,12 @@ export const SignupPage = () => {
               />
               
               Upload Profile Picture
-              {<img className="input-image" src={imageURL}/>}
 
             </label>
             
+            <div className="signup-image">
+              <img className="input-image-signup" src={imageURL}/>
+            </div>
 
             {/* BUTTON SUBMIT */}
             <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Create!" />
