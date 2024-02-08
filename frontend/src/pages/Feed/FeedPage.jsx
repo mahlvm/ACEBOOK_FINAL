@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
 import { getPosts } from "../../services/posts";
-import { getId } from "../../services/users";
+import { getId } from "../../services/user"
 import Post from "../../components/Post/Post";
 import NewPostForm from "../../components/Post/NewPostForm";
 
@@ -32,7 +32,7 @@ export const FeedPage = () => {
           window.localStorage.setItem("token", data.token);
         })
         .catch((err) => {
-          console.err(err);
+          console.error(err);
         });
     } else {
       navigate("/login");
@@ -50,7 +50,7 @@ export const FeedPage = () => {
       <NewPostForm role="new-post"/>
       <div className="feed" role="feed">
         {posts.toReversed().map((post) => (
-          <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} />
+          <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} image={post.image}/>
         ))}
       </div>
       <div className="credits">

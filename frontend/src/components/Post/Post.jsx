@@ -13,14 +13,13 @@ export const Post = (props) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [viewComment, setCommentSection] = useState(false);
   const [likes, setLikes] = useState(props.post.likes);
+  const [image, setImage] = useState();
   const navigate = useNavigate();
   
   const getPostById = (data, post_id) => {
     const comments = data.comments.filter((comment) => comment.post_id == post_id)
     setComments(comments)
   }
-
-  
 
   useEffect(() => {
     if (token) {
@@ -29,14 +28,28 @@ export const Post = (props) => {
           getPostById(data, props.post._id)
           setToken(data.token);
           window.localStorage.setItem("token", data.token);
+          if (props.post.image) {
+            fetchImage(props.post.image)
+          }
         })
         .catch((err) => {
-          console.err(err);
+          console.error(err);
         });
     } else {
       navigate("/posts");
     }
   }, []);
+
+  const fetchImage = async (imageName) => {
+    try {
+        // this makes a request to the server to fetch the image
+        const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+        const blob = await response.blob();
+        setImage(URL.createObjectURL(blob));
+    } catch (error) {
+        console.error('Error fetching image:', error);
+    }
+  };
 
   if (!token) {
     return;
@@ -47,6 +60,7 @@ export const Post = (props) => {
   <br/>
   <h4>POSTS</h4>
   <article key={props.post._id}>{props.post.message}</article>
+  <img className="post-image" src={image}/>
   <div><h6>{props.date}</h6></div>
   <div>
   <ViewCommentButton setCommentSection={setCommentSection} viewComment={viewComment}/>

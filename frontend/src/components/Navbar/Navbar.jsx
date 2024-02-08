@@ -2,7 +2,7 @@ import  { useState, useEffect } from "react";
 import {  Link } from "react-router-dom";
 import './Navbar.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import ang from '../../assets/ang_profile.jpeg';
+// import ang from '../../assets/ang_profile.jpeg';
 import { useNavigate } from "react-router-dom";
 
 import { getAllUserInfo } from "../../services/user"

@@ -126,7 +126,7 @@ export const AccountPage = () => {
                     </label>
 
                      {/* BUTTON SUBMIT */}
-                    <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Update!" />
+                    <input className="btn btn-signup" role="submit-button" id="submit" type="submit" value="Save" />
 
                 </form>
             <div/>

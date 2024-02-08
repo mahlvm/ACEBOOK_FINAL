@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts.js";
-import { getId } from "../../services/users.js";
+import { getId } from "../../services/user.js";
 import "./ProfilePage.css";
 import Post from "../../components/Post/Post.jsx";
 import ProfileFeedSelector from "../../components/Profile/ProfileFeedSelector.jsx";

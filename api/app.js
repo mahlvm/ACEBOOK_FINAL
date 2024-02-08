@@ -39,8 +39,12 @@ const upload = multer ({
   storage: storage 
 })
 
-app.post('/upload', upload.single('profile_picture'), (res, req ) => {
+app.post('/upload/profile', upload.single('profile_picture'), (res, req ) => {
   console.log("I am the profile_picture file:", req.file)
+})
+
+app.post('/upload/image', upload.single('image'), (res, req) => {
+  console.log("I am the post image:", file)
 })
 
 // serves images from the back-end
