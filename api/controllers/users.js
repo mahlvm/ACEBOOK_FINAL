@@ -31,11 +31,23 @@ const create = async (req, res) => {
 
 const getId = async (req, res) => {
   res.status(200).json({ user_id: req.user_id});
+  
 }
+
+
+
+
+
 const getAllUserInfo = async (req, res) => {
+
+  let user = undefined
   try {
 
-    const user = await User.findById(req.user_id);
+    if (req.query.user_id != null) {
+      user = await User.findById(req.query.user_id);
+    } else {
+      user = await User.findById(req.user_id);
+    }
 
     const token = generateToken(req.user_id);
     res.status(200).json({user : user, token: token });
@@ -76,9 +88,12 @@ const updateUsersLikedPost = async (req, res) => {
   const liked_post_id = req.body.post_id
   const status = req.body.status
   const user = await User.findById(req.user_id)
+
   
   if (!user) {
     return res.status(404).json({ message: "Unable to find user's ID"})
+  } else if (!liked_post_id){
+    return res.status(404).json({ message: "Unable to get post ID"})
   }
 
   if (status == "unlike" && user.liked_posts.includes(liked_post_id)){

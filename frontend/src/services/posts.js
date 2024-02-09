@@ -19,6 +19,24 @@ export const getPosts = async (token) => {
   return data;
 };
 
+export const deletePost = async (token, post_id) => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await fetch(`${BACKEND_URL}/posts/${post_id}`, requestOptions);
+
+  if (response.status !== 200) {
+    throw new Error("Unable to find posts");
+  }
+
+  const data = await response.json();
+  return data;
+}
+  
 // posts the posts image to the server 
 export const uploadPostImage = async (image) => {
 

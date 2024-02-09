@@ -8,6 +8,8 @@ import { ViewCommentButton } from "./ViewCommentButton";
 import LikeButton from "../LikeButton";
 import { getAllUserInfo } from "../../services/user";
 import './Post.css';
+import { getId, getUserDataByUserId } from "../../services/user";
+import { deletePost } from "../../services/posts";
 
 
 export const Post = (props) => {
@@ -15,6 +17,7 @@ export const Post = (props) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [viewComment, setCommentSection] = useState(false);
   const [likes, setLikes] = useState(props.post.likes);
+  const [username, setUsername] = useState()
   const [image, setImage] = useState();
   const [profilePicture, setProfilePicture] = useState();
   const [user, setUser] = useState([]);
@@ -25,8 +28,35 @@ export const Post = (props) => {
     setComments(comments)
   }
 
+  const handleClickOnPost = async () => {
+    
+    const data = await getUserDataByUserId(token, props.post.user_id)
+    const user = data.user
+    navigate(`/profilepage/${user.username}`, 
+    {state: {
+      visiting_user_id: user._id,
+      visiting_username: user.username, 
+      visiting_profile_picture: user.profile_picture, 
+      visiting_liked_posts: user.liked_posts}})
+      window.location.reload(true)
+  }
+
+  const handleClickDelete = async () => {
+    await deletePost(token, props.post._id)
+    window.location.reload(true)
+  }
+
   useEffect(() => {
     if (token) {
+      getUserDataByUserId(token, props.post.user_id)
+        .then((data) => {
+          setUsername(data.user.username)
+          if (data.user.profile_picture) {
+              fetchProfileImage(data.user.profile_picture);
+          }
+        })
+
+
       getComment(token)
         .then((data) => {
           getPostById(data, props.post._id)
@@ -44,23 +74,23 @@ export const Post = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (token) {
-        getAllUserInfo(token)
-            .then((data) => {
-            setUser(data.user);
-            setToken(data.token);
-            window.localStorage.setItem("token", data.token);
-            if (data.user.profile_picture) {
-                fetchProfileImage(data.user.profile_picture);
-            }
-            })
-    .catch((err) => {
-        console.error(err);
-        console.log(err)
-        });
-    }
-}, []);
+//   useEffect(() => {
+//     if (token) {
+//         getAllUserInfo(token)
+//             .then((data) => {
+//             setUser(data.user);
+//             setToken(data.token);
+//             window.localStorage.setItem("token", data.token);
+//             if (data.user.profile_picture) {
+//                 fetchProfileImage(data.user.profile_picture);
+//             }
+//             })
+//     .catch((err) => {
+//         console.error(err);
+//         console.log(err)
+//         });
+//     }
+// }, []);
 
   const fetchPostImage = async (imageName) => {
     try {
@@ -99,13 +129,17 @@ export const Post = (props) => {
     <div className="feedPostSingle">
 
       <div className="profilePhoto">
-        <img className="profileIconFeed" src={profilePicture}/>
+        <img className="profileIconFeed" src={profilePicture} onClick={handleClickOnPost}/>
       <div/>
+      {/* {props.user_id == props.post.user_id && <button onClick={handleClickDelete}>delet</button> }
+      {props.user_id == props.post.user_id && 
+      <input onClick={handleClickDelete} type="image" src="src/assets/menu.png" alt="Menu icon" multiple/>  } */}
 
+      
       <div className="username-date-added">
       <div className="spanText">
         
-          <span className="userName"> {user.username} </span>
+          <span className="userName" onClick={handleClickOnPost}> {username} </span>
         
         
           <span className="datePost"> {props.date} </span>
@@ -141,7 +175,7 @@ export const Post = (props) => {
       <CommentForm role="new-comment" post_id={props.post._id}/>
       <div className="comment" role="comment">
           {comments.toReversed().map((comment) => (
-          <Comment comment={comment} key={comment._id} date={comment.time_of_comment} />
+          <Comment comment={comment} key={comment._id} date={comment.time_of_comment} user_id={props.user_id}/>
           ))}
 
     </div>
