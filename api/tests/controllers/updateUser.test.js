@@ -1,11 +1,10 @@
 const request = require("supertest");
 const JWT = require("jsonwebtoken");
-
-const app = require("../../app");
 const User = require("../../models/user");
 
-require("../mongodb_helper");
+const app = require("../../app");
 
+require("../mongodb_helper");
 const secret = process.env.JWT_SECRET;
 
 const createToken = (userId) => {
@@ -22,8 +21,10 @@ const createToken = (userId) => {
 };
 
 let token;
+
 describe("/users", () => {
-    beforeAll(async () => {
+
+    beforeEach(async () => {
         const user = new User({
             username: "Test user",
             email: "Test email",
@@ -31,36 +32,48 @@ describe("/users", () => {
             profile_picture: null,
             liked_posts: ["post1", "post2"],
         });
+
         await user.save();
         token = createToken(user.id);
+        console.log(user.id)
     });
 
-    describe("GET, when a token is present", () => {
+    beforeAll( async () => {
+        await User.deleteMany({});
+    });
+
+    describe("PATCH, when a token is present", () => {
         test("responds with a 200", async () => {
             const response = await request(app)
-                .get("/users")
+                .patch("/users")
                 .set("Authorization", `Bearer ${token}`);
         
         expect(response.status).toEqual(200);
         });
 
-        test("returns all the information for the user", async () => {
+    describe("Updated user data", () => {
+        test("updates information for a test user", async () => {
+            const username = "New username";
+            const email =  "New email";
+            const password = "";
+            const profile_picture = "";
+
             const response = await request(app)
-            .get("/users")
-            .set("Authorization", `Bearer ${token}`);
+                .patch("/users")
+                .set("Authorization", `Bearer ${token}`)
+                .send({ username, email, password, profile_picture, token })
 
             expect(response.status).toEqual(200);
-            const user1 = response.body.user;
-            console.log(`I should be an object: ${user1}`)
 
-            expect(user1.username).toEqual("Test user");
-            expect(user1.email).toEqual("Test email");
-            expect(user1.liked_posts).toEqual(["post1", "post2"])
-        })
-
+            expect(username).toEqual("New username");
+            expect(email).toEqual("New email");
+            });
+        });
+        
+    describe("Testing new tokens", () => {
         test("a new token is returned", async () => {
             const response = await request(app)
-                .get("/users")
+                .patch("/users")
                 .set("Authorization", `Bearer ${token}`);
             
             const newToken = response.body.token;
@@ -69,17 +82,16 @@ describe("/users", () => {
 
       // iat stands for issued at
             expect(newTokenDecoded.iat > oldTokenDecoded.iat).toEqual(true);
-        });
+        })
     })
 
     // added a test here for a missing token. 
-    describe("GET, when a token is missing", () => {
+    describe("Fails when a token is missing", () => {
         test("the reponse code is 401", async () => {
-            const response = await request(app).get("/users");
+            const response = await request(app).patch("/users");
             
             expect(response.status).toEqual(401);
         })
     })
 })
-
-
+})

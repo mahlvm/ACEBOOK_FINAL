@@ -44,22 +44,22 @@ export const login = async (email, password) => {
 };
 
 export const signup = async (username, email, password, profile_picture) => {
-  const payload = {
-    username: username,
-    email: email,
-    password: password,
-    profile_picture: profile_picture,
-  };
-
+    const payload = {
+      username: username,
+      email:email,
+      password: password,
+      profile_picture: profile_picture.name,
+    }
+    
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    body:  JSON.stringify(payload),
   };
 
-  let response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
@@ -71,3 +71,4 @@ export const signup = async (username, email, password, profile_picture) => {
     );
   }
 };
+

@@ -11,7 +11,7 @@
 
 }
 
-body{
+.bodyHome{
   font-family: Arial, Helvetica, sans-serif;
   background-color: var(--collor-gray);
   display: flex;
@@ -68,37 +68,42 @@ h3{
   box-shadow: rgb(0 0 0 / 10%), rgb(0 0 0 / 10%) 0px 8px 16px;
 }
 
-.btn{
-  padding: 15px;
+.btn-login{
+  padding: 20px;
   border: none;
-  color: var(--collor--white);
   border-radius: 5px;
   width: 90%;
-  font-size: 1.1rem;
   transition: .2s;
+  background-color: var(--collor-blue);
 }
 
-.btn:hover{
-  color: var(--collor-gray);
+.btn-login-link{
+  color: var(--collor--white);
+  font-size: 20px;
+}
+
+
+.btn-login:hover{
+  background-color: var(--color-blue2);
 }
 
 .btn-signup{
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  transition: .2s;
   background-color: var(--collor-green);
 }
+
 .btn-signup:hover{
   background-color: var(--collor-green2);
 }
 
 
-
-.btn-login{
-  background-color: var(--collor-blue);
-  
+.btn-signup-link{
+  color: var(--collor--white);
+  font-size: 20px;
 }
-.btn-login:hover{
-  background-color: var(--color-blue2);
-}
-
-
 
 

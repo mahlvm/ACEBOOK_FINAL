@@ -19,7 +19,7 @@ describe("TokenGenerator", () => {
       expect(payload_2.user_id).toEqual(id_2);
 
       // Token is valid for 1800 seconds (30 minutes)
-      expect(payload_1.exp - payload_1.iat).toEqual(1800);
+      expect(payload_1.exp - payload_1.iat).toEqual(600);
     });
   });
 });

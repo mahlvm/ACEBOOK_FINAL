@@ -10,17 +10,6 @@
     --collor-green2: #36a420;
 }
 
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--collor-gray);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-}
-
-
 .signup-box{
     background-color: var(--collor--white);
     display: flex;
@@ -58,6 +47,10 @@ h2{
     box-shadow: 0 0 0 2px, color var(--color-blue2)
 }
 
+.input-image {
+    max-width: 100px;
+}
+
 .btn{
     padding: 15px;
     border: none;
@@ -89,7 +82,7 @@ h2{
     background-color: var(--collor-gray3);
     color: var(--collor--white);
     border-radius: 5px;
-    width: 50%;
+    width: 45%;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: 20px;
@@ -98,4 +91,26 @@ h2{
 
 .picture:hover {
     background-color: var(--collor-gray2);
+}
+
+.btn-login{
+    background-color: var(--collor-blue);
+    cursor: pointer;
+
+}
+.btn-login:hover{
+    background-color: var(--color-blue2);
+}
+
+hr{
+    width: 100%;
+    border: 1px solid var(--collor-gray2);
+}
+
+.update-image-signup {
+    max-width: 5%;
+}
+
+.input-image-signup {
+    max-width: 200px;
 }

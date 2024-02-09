@@ -18,3 +18,23 @@ export const getPosts = async (token) => {
   const data = await response.json();
   return data;
 };
+
+// posts the posts image to the server 
+export const uploadPostImage = async (image) => {
+
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const requestOptions = {
+      method: "POST",
+      body: formData,
+      }
+  console.log(formData)
+
+  const response = await fetch(`${BACKEND_URL}/upload/image`, requestOptions);
+
+  if (response.status !== 200) {
+      // If profile picture upload fails, throw an error
+      throw new Error(`Received status ${response.status} when uploading profile picture. Expected 200`);
+  }
+}

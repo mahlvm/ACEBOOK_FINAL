@@ -1,11 +1,7 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./LoginPage.css";
-
-import Navbar from "../../components/Navbar/Navbar";
-
 
 import { login } from "../../services/authentication";
 import { Link } from "react-router-dom";
@@ -39,7 +35,7 @@ export const LoginPage = () => {
 
   return (
 
-    <body>
+    <>
 
       <div className="login-box">
         {/* TITULO */}
@@ -79,7 +75,7 @@ export const LoginPage = () => {
 
     
 
-    </body>
+    </>
 
   );
 };

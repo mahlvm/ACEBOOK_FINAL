@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
@@ -115,6 +116,7 @@ export const ProfilePage = () => {
         ))}
       </div>
     </div>
+
     </div>
   );
 };
