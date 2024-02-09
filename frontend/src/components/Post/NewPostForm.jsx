@@ -83,8 +83,8 @@ const NewPostForm = () => {
       <form className="feedForm " onSubmit={handleSubmit}>
 
           <div className="boxText">
-            <img className="profileIcon" src="src/assets/profile.png"/>
             <input className="postFormInput" type="text" onChange={handleMessageChange} data-testid="post-input" placeholder="Say Hello!" />
+            
           </div>
 
           <hr/>
