@@ -16,7 +16,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
 
 
@@ -59,10 +59,6 @@ body{
 
 .profile-pic-container {
     margin-left: auto;
-}
-
-.spacer {
-    margin-top: 400px;
 }
 
 .bio-box .profile-bio p {
@@ -169,6 +165,7 @@ hr{
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    color: white;
 }
 
 .feed-selector-button:hover {
@@ -181,8 +178,18 @@ hr{
 
 .feed-selector-container {
     display: flex;
+    flex-direction: column;
     gap: 50px;
     justify-content: center;
+    margin-top: 10px;
+    min-height: 100%;
+}
+
+.feed-selector-button-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 20px;
 }
 
 .profile-hero {

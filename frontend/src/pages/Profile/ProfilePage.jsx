@@ -105,10 +105,10 @@ export const ProfilePage = () => {
   return (
     <div className="profilepage">
       <Navbar />
-      <div class="bio-box">
-        <div class="bio-header"><h2>About Me</h2><div class='profile-pic-container'><img class="bio-profile-pic" src={profilePicture} /></div></div>
+      <div className="bio-box">
+        <div className="bio-header"><h2>About Me</h2><div class='profile-pic-container'><img class="bio-profile-pic" src={profilePicture} /></div></div>
         <hr></hr>
-        <div class="profile-bio">
+        <div className="profile-bio">
           <p>
             {user.bio || "Your bio goes here!"}
           </p>
@@ -116,7 +116,7 @@ export const ProfilePage = () => {
       </div>
       {/* profile nav bar - (posts, liked_posts) */}
       <div class="feed-selector-container">
-        <div class ="feed-selector-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
+        <div class ="feed-selector-button-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
       </div>
       <div className="feed" role="feed">
         {posts.toReversed().map((post) => (

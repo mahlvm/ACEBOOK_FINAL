@@ -10,8 +10,8 @@ const ProfileFeedSelector = (props) => {
 
     return (
         <>
-            <h4><a onClick={handlePostFeedClick}>Posts</a></h4>
-            <h4><a onClick={handleLikedFeedClick}>Liked</a></h4>
+            <div class='feed-selector-button'><h4><a class="feed-selector-link" onClick={handlePostFeedClick}>Posts</a></h4></div>
+            <div class='feed-selector-button'><h4><a class="feed-selector-link" onClick={handleLikedFeedClick}>Liked</a></h4></div>
         </>
     )
 }
