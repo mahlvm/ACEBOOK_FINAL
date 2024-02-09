@@ -100,7 +100,7 @@ export const ProfilePage = () => {
           </p>
         </div>
       </div>
-      {/* profile nave bar - (posts, liked_posts) */}
+      {/* profile nav bar - (posts, liked_posts) */}
       <div class="feed-selector-container">
         <div class ="feed-selector-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
       </div>
