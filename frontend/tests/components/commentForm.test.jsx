@@ -50,7 +50,7 @@ describe("Comment Form", () => {
   it("sends a post requestion when form is sent", () => {
     render(<CommentForm />);
 
-    console.log(global.fetch)
+    submitComment()
 
     const article = screen.getByRole("article");
     expect(article.textContent).toBe("test comment");

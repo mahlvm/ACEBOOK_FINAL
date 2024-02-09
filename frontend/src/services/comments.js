@@ -18,3 +18,21 @@ export const getComment = async (token) => {
     const data = await response.json();
     return data;
 };
+
+export const deleteComment = async (token, comment_id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  
+    const response = await fetch(`${BACKEND_URL}/comments/${comment_id}`, requestOptions);
+  
+    if (response.status !== 200) {
+      throw new Error("Unable to find comment");
+    }
+  
+    const data = await response.json();
+    return data;
+  }

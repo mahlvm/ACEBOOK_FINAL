@@ -22,9 +22,11 @@ const createComment = async (req, res) => {
     res.status(201).json({message: "OK", token: newToken});
 };
 
-const clearTestComments = async (req, res) => {
-    console.log("here")
-    await Comment.deleteMany({})
+const deleteComment = async (req, res) => {
+    await Comment.findByIdAndDelete(req.params.id)
+
+    const newToken = generateToken(req.user_id);
+    res.status(200).json({message: "Post sucessfully deleted", token: newToken})
 }
 
 
@@ -32,7 +34,7 @@ const clearTestComments = async (req, res) => {
 const CommentController = {
     createComment: createComment,
     getAllComment: getAllComment,
-    clearTestComments: clearTestComments
+    deleteComment: deleteComment
 };
 
 

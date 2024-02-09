@@ -33,7 +33,11 @@ const router = createBrowserRouter([
   {
     path: "/profilepage",
     element: <ProfilePage />
-  }
+  },
+  {
+    path: "/profilepage/:userName",
+    element: <ProfilePage />
+  },
 ]);
 
 const App = () => {

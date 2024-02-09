@@ -9,7 +9,6 @@ export const getAllUserInfo = async (token) => {
         },
     };
 
-    // is being called
     const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
 
     if (response.status !== 200) {
@@ -38,6 +37,28 @@ export const getId = async (token) => {
     }
   
     const data = await response.json();
+    console.log("data")
+
+    return data;
+  }
+
+
+  export const getUserDataByUserId = async (token, id) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  
+    const response = await fetch(`${BACKEND_URL}/users/?` +
+    new URLSearchParams({user_id: id}).toString(), requestOptions);
+    if (response.status !== 200) {
+      throw new Error("Unable to fetch user id");
+    }
+  
+    const data = await response.json();
+
     return data;
   }
 

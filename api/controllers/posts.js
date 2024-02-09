@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const Comment = require("../models/comment")
 const { generateToken } = require("../lib/token");
 
 const getAllPosts = async (req, res) => {
@@ -39,10 +40,19 @@ const post = await Post.findById(req.body.id);
  res.status(201).json({message: "OK, liked.", token: newToken});
 };
 
+const deletePost = async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id)
+  await Comment.deleteMany({post_id: req.params.id})
+
+  const newToken = generateToken(req.user_id);
+  res.status(200).json({message: "Post sucessfully deleted", token: newToken})
+}
+
 const PostsController = {
   getAllPosts: getAllPosts,
   createPost: createPost,
   likePost: likePost,
+  deletePost: deletePost
 };
 
 module.exports = PostsController;

@@ -10,5 +10,6 @@ const logReq = (req) => {
 router.get("/", PostsController.getAllPosts);
 router.post("/", PostsController.createPost);
 router.post("/like", PostsController.likePost);
+router.delete("/:id", PostsController.deletePost)
 
 module.exports = router;

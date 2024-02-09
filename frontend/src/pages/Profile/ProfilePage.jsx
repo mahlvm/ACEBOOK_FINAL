@@ -1,23 +1,25 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getPosts } from "../../services/posts.js";
 import { getId } from "../../services/user.js";
 import "./ProfilePage.css";
 import Post from "../../components/Post/Post.jsx";
 import ProfileFeedSelector from "../../components/Profile/ProfileFeedSelector.jsx";
+import { getAllUserInfo, getUserDataByUserId } from "../../services/user.js";
 
-import { getAllUserInfo } from "../../services/user.js";
+
 
 export const ProfilePage = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [userId, setUserId] = useState("");
-  const [profilePicture, setProfilePicture] = useState();
-  const [user, setUser] = useState([]);
+  const [pageUserId, setPageUserId] = useState('');
+  const [activeUserId, setActiveUserId] = useState() 
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState("");
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   useEffect(() => {
     if (token) {
@@ -37,15 +39,15 @@ export const ProfilePage = () => {
     }
 }, []);
 
-  const getUsersPosts = (posts, userId) => {
-    console.log(userId);
-    return posts.filter((post) => post.user_id == userId);
-  };
+  const getUsersPosts = (posts, pageUserId) => {
+    console.log(pageUserId)
+    return posts.filter((post) => post.user_id == pageUserId)
+  }
 
-  const getLikedPosts = async (posts) => {
-    const data = await getAllUserInfo(token);
-    const user_liked_list = data.user.liked_posts;
-    console.log(posts);
+  const getLikedPosts = async (posts, user_id) => {
+    const data = await getUserDataByUserId(token, user_id);
+    const user_liked_list = data.user.liked_posts
+    console.log(posts)
 
     return posts.filter((post) => user_liked_list.includes(post._id));
   };
@@ -53,25 +55,32 @@ export const ProfilePage = () => {
   useEffect(() => {
     if (token) {
       getId(token)
-        .then((data) => {
-          setUserId(data.user_id);
-          return data.user_id;
-        })
-        .then((userId) => {
-          getPosts(token).then((data) => {
+      .then((data) => {
+        setActiveUserId(data.user_id);
+        let profile_page_user_data = "";
+        if (state) {
+          profile_page_user_data = state.visiting_user_id;
+          setPageUserId(state.visiting_user_id);
+        } else {
+          profile_page_user_data = data.user_id;
+          setPageUserId(data.user_id);
+        }
+        return profile_page_user_data
+      })
+      .then((currentPageUserId) => {
+        getPosts(token)
+          .then((data) => {
+            
             setToken(data.token);
-            console.log(feed);
-            console.log(data.posts);
 
             if (feed == "Posts") {
-              let usersPosts = getUsersPosts(data.posts, userId);
-              console.log(usersPosts);
+              let usersPosts = getUsersPosts(data.posts, currentPageUserId);
+              console.log(usersPosts)
               setPosts(usersPosts);
-              console.log(posts);
             } else if (feed == "Liked") {
-              getLikedPosts(data.posts).then((likedPosts) => {
-                console.log(likedPosts);
-                setPosts(likedPosts);
+              getLikedPosts(data.posts, currentPageUserId)
+              .then((likedPosts) => {console.log(likedPosts)
+              setPosts(likedPosts)
               });
             }
 
@@ -124,12 +133,14 @@ export const ProfilePage = () => {
             post={post}
             key={post._id}
             date={post.time_of_post}
-            user_id={userId}
+            user_id={activeUserId}
           />
         ))}
       </div>
     </div>
-
+    <div className="credits">
+      <a href="https://www.flaticon.com/free-icons/heart"></a>
+    </div>
     </div>
   );
 };
