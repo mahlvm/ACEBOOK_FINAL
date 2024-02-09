@@ -9,6 +9,6 @@ const logReq = (req) => {
 
 router.get("/", CommentController.getAllComment);
 router.post("/", CommentController.createComment);
-router.delete("/", CommentController.clearTestComments)
+router.delete("/:id", CommentController.deleteComment)
 
 module.exports = router

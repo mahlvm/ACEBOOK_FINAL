@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getUserDataByUserId } from "../../services/user";
 import { useNavigate } from "react-router-dom";
+import { deleteComment } from "../../services/comments";
 
 
 const Comments = (props) => {
@@ -21,7 +22,12 @@ const Comments = (props) => {
             visiting_username: user.username, 
             visiting_profile_picture: user.profile_picture, 
             visiting_liked_posts: user.liked_posts}})
+        window.location.reload(true)
+    }
 
+    const handleClickDelete = async () => {
+        await deleteComment(token, props.comment._id)
+        window.location.reload(true)
     }
 
     useEffect(() => {
@@ -39,6 +45,7 @@ const Comments = (props) => {
         <div className='boxComment'>
             <div className='commentSpace'>
                 {/* {check css for spantext} */}
+                {props.user_id == props.comment.user_id && <button onClick={handleClickDelete}>deleee</button>}
                 <img style={{height: "40px"}} src="src/assets/profile.png" onClick={handleClickOnComment}/>
                 <div className='spanText'>
                     <span onClick={handleClickOnComment}>{username}</span>

@@ -13,7 +13,8 @@ import { getAllUserInfo, getUserDataByUserId } from "../../services/user.js";
 
 export const ProfilePage = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [userId, setUserId] = useState('');
+  const [pageUserId, setPageUserId] = useState('');
+  const [activeUserId, setActiveUserId] = useState() 
   const [posts, setPosts] = useState([]);
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
@@ -22,9 +23,9 @@ export const ProfilePage = () => {
 
 
 
-  const getUsersPosts = (posts, userId) => {
-    console.log(userId)
-    return posts.filter((post) => post.user_id == userId)
+  const getUsersPosts = (posts, pageUserId) => {
+    console.log(pageUserId)
+    return posts.filter((post) => post.user_id == pageUserId)
   }
 
   const getLikedPosts = async (posts, user_id) => {
@@ -39,15 +40,16 @@ export const ProfilePage = () => {
     if (token) {
       getId(token)
       .then((data) => {
-        let user_data = ""
+        setActiveUserId(data.user_id);
+        let profile_page_user_data = "";
         if (state) {
-          user_data = state.visiting_user_id
-          setUserId(state.visiting_user_id)
+          profile_page_user_data = state.visiting_user_id;
+          setPageUserId(state.visiting_user_id);
         } else {
-          user_data = data.user_id
-          setUserId(data.user_id)
+          profile_page_user_data = data.user_id;
+          setPageUserId(data.user_id);
         }
-        return user_data
+        return profile_page_user_data
       })
       .then((currentPageUserId) => {
         getPosts(token)
@@ -77,7 +79,7 @@ export const ProfilePage = () => {
     } else {
       navigate("/login")
     }
-  }, [feed, userId])
+  }, [feed])
 
   if(!token) {
     return;
@@ -90,7 +92,7 @@ export const ProfilePage = () => {
         <ProfileFeedSelector feed={feed} setFeed={setFeed}/>
         <div className="feed" role="feed">
         {posts.toReversed().map((post) => (
-          <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} />
+          <Post post={post} key={post._id} date={post.time_of_post} user_id={activeUserId} />
         ))}
         </div>
     </div>

@@ -9,6 +9,7 @@ import LikeButton from "../LikeButton";
 import { getAllUserInfo } from "../../services/user";
 import './Post.css';
 import { getId, getUserDataByUserId } from "../../services/user";
+import { deletePost } from "../../services/posts";
 
 
 export const Post = (props) => {
@@ -33,6 +34,12 @@ export const Post = (props) => {
       visiting_username: user.username, 
       visiting_profile_picture: user.profile_picture, 
       visiting_liked_posts: user.liked_posts}})
+      window.location.reload(true)
+  }
+
+  const handleClickDelete = async () => {
+    await deletePost(token, props.post._id)
+    window.location.reload(true)
   }
 
   useEffect(() => {
@@ -72,6 +79,7 @@ export const Post = (props) => {
 
         <div className="profilePhoto">
           <img className="profileIconFeed" src="src/assets/profile.png" onClick={handleClickOnPost}/>
+          {props.user_id == props.post.user_id && <button onClick={handleClickDelete}>delet</button> }
           <div className="spanText">
             <span onClick={handleClickOnPost}> {username} </span>
             <div className="datePost"><h6>{props.date}</h6></div>
@@ -103,7 +111,7 @@ export const Post = (props) => {
       <CommentForm role="new-comment" post_id={props.post._id}/>
       <div className="comment" role="comment">
           {comments.toReversed().map((comment) => (
-          <Comment comment={comment} key={comment._id} date={comment.time_of_comment} />
+          <Comment comment={comment} key={comment._id} date={comment.time_of_comment} user_id={props.user_id}/>
           ))}
 
     </div>
