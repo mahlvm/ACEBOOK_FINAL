@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar/Navbar.jsx";
 import { updateUserInfo } from "../../services/updateUser.js";
 import { getAllUserInfo } from "../../services/user.js";
 import { updateImage } from "../../services/updateUser.js";
-import { useNavigate } from "react-router-dom";
 
 import "./AccountPage.css";
 
@@ -13,7 +12,6 @@ export const AccountPage = () => {
     const [password, setPassword] = useState("");
     const [profile_picture, setProfilePicture] = useState(null);
     const [imageURL, setImageURL] = useState();
-    const navigate = useNavigate();
 
     const [user, setUser] = useState([]);
     const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -34,18 +32,42 @@ export const AccountPage = () => {
         }
     }, []);
 
+    console.log("I am not in a function", profile_picture)
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-            try {
-                await updateUserInfo(username, email, password, profile_picture, token)
-                    .then(updateImage(profile_picture))
+            if (!profile_picture) {
+                handleSubmitWithoutPicture();
+                window.location.reload();
+            }
+            else {
+                handleSubmitWithPicture();
+                window.location.reload();
+            }
+    }
+    const handleSubmitWithoutPicture = async () => {
+        console.log("A string");
+        try {
+            console.log("I am the profile", profile_picture)
+            await updateUserInfo(username, email, password, profile_picture, token)
                     console.log("Details updated!");
-                    navigate("/profilepage")
-            } catch (err) {
+                    }
+                catch (err) {
+                    console.error(err);
+                }
+        }
+
+    const handleSubmitWithPicture = async () => {
+        try {
+        await updateUserInfo(username, email, password, profile_picture, token);
+            await updateImage(profile_picture);
+                console.log("Details updated!");
+                }
+            catch (err) {
                 console.error(err);
             }
-        };
-    
+        }
+
         const handleUsernameChange = (event) => {
             setUsername(event.target.value);
         };
@@ -61,6 +83,8 @@ export const AccountPage = () => {
         const handleProfilePictureChange = (event) => {
             const file = event.target.files[0];
             setProfilePicture(file);
+            console.log("I am the file:",file)
+            console.log(profile_picture)
             setImageURL(URL.createObjectURL(file));
         };
     

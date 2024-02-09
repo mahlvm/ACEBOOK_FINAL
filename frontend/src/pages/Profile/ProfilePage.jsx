@@ -16,12 +16,26 @@ export const ProfilePage = () => {
   const [pageUserId, setPageUserId] = useState('');
   const [activeUserId, setActiveUserId] = useState() 
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState("");
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
   const { state } = useLocation();
 
-
-
+  useEffect(() => {
+    if (token) {
+      getAllUserInfo(token)
+        .then((data) => {
+          setUser(data.user);
+          console.log(data.user);
+          setToken(data.token);
+          window.localStorage.setItem("token", data.token);
+        })
+        .catch((err) => {
+          console.err(err);
+          console.log(err);
+        });
+    }
+  }, []);
 
   const getUsersPosts = (posts, pageUserId) => {
     console.log(pageUserId)
@@ -33,8 +47,8 @@ export const ProfilePage = () => {
     const user_liked_list = data.user.liked_posts
     console.log(posts)
 
-    return posts.filter(post => user_liked_list.includes(post._id))
-  }
+    return posts.filter((post) => user_liked_list.includes(post._id));
+  };
 
   useEffect(() => {
     if (token) {
@@ -67,37 +81,53 @@ export const ProfilePage = () => {
               setPosts(likedPosts)
               });
             }
-            
+
             window.localStorage.setItem("token", data.token);
-
-          })
+          });
         })
-      .catch((err) => {
-        console.error(err);
-        navigate("/login")
-      })
+        .catch((err) => {
+          console.error(err);
+          navigate("/login");
+        });
     } else {
-      navigate("/login")
+      navigate("/login");
     }
-  }, [feed])
+  }, [feed]);
 
-  if(!token) {
+  if (!token) {
     return;
   }
 
   return (
     <div className="profilepage">
       <Navbar />
-        <h1>This is your profile!</h1>
-        <ProfileFeedSelector feed={feed} setFeed={setFeed}/>
-        <div className="feed" role="feed">
+      <div className="bio-box">
+        <div className="bio-header"><h2>About Me</h2><div className='profile-pic-container'><img className="bio-profile-pic" src={user} /></div></div>
+        <hr></hr>
+        <div className="profile-bio">
+          <p>
+            {user.bio || "Your bio goes here!"}
+          </p>
+        </div>
+      </div>
+      {/* profile nav bar - (posts, liked_posts) */}
+      <div className="feed-selector-container">
+        <div className ="feed-selector-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
+      </div>
+      <div className="feed" role="feed">
         {posts.toReversed().map((post) => (
-          <Post post={post} key={post._id} date={post.time_of_post} user_id={activeUserId} />
+          <Post
+            post={post}
+            key={post._id}
+            date={post.time_of_post}
+            user_id={activeUserId}
+          />
         ))}
-        </div>
-        <div className="credits">
-          <a href="https://www.flaticon.com/free-icons/heart"></a>
-        </div>
+      </div>
+    </div>
+    <div className="credits">
+      <a href="https://www.flaticon.com/free-icons/heart"></a>
+    </div>
     </div>
   );
 };

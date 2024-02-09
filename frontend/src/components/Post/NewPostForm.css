@@ -9,6 +9,8 @@
     --color-blue2: #1268d9;
     --collor-green: #42b72a;
     --collor-green2: #36a420;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -18,6 +20,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 600px;
     padding: 10px;
+    margin-bottom: auto;
 }
 
 .feedForm{

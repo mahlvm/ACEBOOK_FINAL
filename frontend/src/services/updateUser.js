@@ -6,8 +6,11 @@ export const updateUserInfo = async (username, email, password, profile_picture,
         username: username,
         email: email,
         password: password,
-        profile_picture: profile_picture.name
+        profile_picture: null,
     };
+        if (profile_picture) {
+            payload.profile_picture = profile_picture.name
+        }
 
     const requestOptions = {
         method: "PATCH",
