@@ -91,3 +91,19 @@
     padding: 5px;
     padding-top: 10px;
 }
+
+.post-menu {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 350px;
+    width: 20px;
+    height: 20px;
+}
+
+.post-dropdown {
+    position:relative;
+    left: 200px;
+    width: 30px;
+    height: 50px;
+    z-index: 0;
+}
