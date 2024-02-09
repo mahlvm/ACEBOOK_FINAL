@@ -58,7 +58,7 @@ export const Navbar = () => {
     return (
 
     
-
+            <>
             <nav className="navbar-header">
 
                 <div className="left-header">
@@ -84,6 +84,7 @@ export const Navbar = () => {
                 </div>  
     
             </nav>
+            </>
 
 
 
