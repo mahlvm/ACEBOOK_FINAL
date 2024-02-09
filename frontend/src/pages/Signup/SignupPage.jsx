@@ -87,11 +87,14 @@ export const SignupPage = () => {
               onChange={handleEmailChange}
             required />
 
+            {/* ERROR */}
+            {signUpError && <div className="invalid-signup" role="invalid-signup">{signUpError}</div>}
+
             {/* PASSWORD FORM */}
             {/* <label htmlFor="password">Password:</label> */}
             <input
               className="input-sg"
-              placeholder="Password"
+              placeholder="A strong password"
               id="password"
               type="password"
               minLength="8"
@@ -130,12 +133,6 @@ export const SignupPage = () => {
             <button className="btn btn-login">
                 <Link to="/login" className="btn">Log In</Link>
             </button>
-
-
-
-            {/* ERROR */}
-            {signUpError && <div ><h4 role="invalid-signup">{signUpError}</h4></div>}
-
 
       </div>
     </>
