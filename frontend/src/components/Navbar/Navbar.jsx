@@ -58,7 +58,6 @@ export const Navbar = () => {
     return (
 
     
-        // <div className="nav-box">
 
             <nav className="navbar-header">
 
@@ -66,27 +65,25 @@ export const Navbar = () => {
                     <div className="logo">
                         <Link className="logo-home" to='/posts'>Acebook</Link>
                     </div>
-            
-                    <div className="buttons">
-                    <Link className="btnHeader-profile" to='/profilepage'>Profile</Link>
-                    <Link className="btnHeader-account" to='/accountpage'>Account</Link>
-                    <Link className="btnHeader-logout" to='/' onClick={logout}>Logout</Link>
+                    <div className="user-greeting" data-testid="user-greeting">
+                        <p>Welcome back, {user.username || "You"} </p>
                     </div>
                 </div>
 
                 <div className="right-header">
-                    <div className="user-greeting" data-testid="user-greeting">
-                        Hi {user.username || "You"}  
-                    </div>
+                    
                     <img src={profilePicture} className="photo-profile" style={{ maxWidth: '15%' }} onClick={handleDropdownToggle}/>
+                    <div class ='dropdown-space'></div>
                     <div
                         className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
                         aria-labelledby="navbarDropdown">
+                    <a className="btnHeader-profile" href='/profilepage'>Profile</a><hr/>
+                    <a className="btnHeader-account" href='/accountpage'>Account</a><hr/>
+                    <a className="btnHeader-logout" href='/' onClick={logout}>Logout</a>
                     </div>
                 </div>  
     
             </nav>
-        // </div>
 
 
 
