@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-// import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 import "./HomePage.css";
 
@@ -8,6 +8,9 @@ export const HomePage = () => {
   return (
 
     <>
+    <div className="bodyHome">
+
+    
         {/* Left Column */}
         <div className="content-info">
           <h1>Welcome to Acebook!</h1>
@@ -17,20 +20,20 @@ export const HomePage = () => {
         <div className="content-login">
             <div className="buttons-box">
 
-              <button className="btn btn-login">
-                <Link to="/login" className="btn">Log In</Link>
-              </button>
+              <div className="btn-login">
+                <Link to="/login" className="btn-login-link">Log In</Link>
+              </div>
 
 
-              <button className="btn btn-signup">
-                <Link to="/signup" className="btn">Create new account</Link>
-              </button>
+              <div className="btn-signup">
+                <Link to="/signup" className="btn-signup-link">Create new account</Link>
+              </div>
 
             </div>
 
         </div>
 
-
+        </div>
 
 
     </>
