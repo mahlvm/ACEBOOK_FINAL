@@ -49,7 +49,6 @@ const NewPostForm = () => {
         datetime: datetime,
         image: image.name,
       };
-      console.log("I am the post payload:", payload)
 
       fetch(`${BACKEND_URL}/posts`, {
         method: "POST",
@@ -66,7 +65,6 @@ const NewPostForm = () => {
   
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
-    console.log("Iam the smessage:", setMessage)
   };
 
   const handleImageChange = (event) => {
