@@ -51,6 +51,9 @@ export const LoginPage = () => {
         {/* FORM PASSWORD */}
         {/* <label htmlFor="password">Password:</label> */}
         <input className="input" placeholder="Password"  id="password" type="password"  value={password} onChange={handlePasswordChange}/>
+        
+        {/* ERROR */}
+        {loginError && <div className="invalid-signup" role="invalid-signup">{loginError} </div>}
 
         {/* Button SUBMIT */}
         <input className="btn btn-login" role="submit-button" id="submit" type="submit" value="Login" />
@@ -66,10 +69,6 @@ export const LoginPage = () => {
                 <Link to="/signup" className="btn">Create new account</Link>
         </button>
         
-
-
-        {/* ERROR */}
-        {loginError && <div><h4>{loginError}</h4></div>}
 
       </div>    
 
