@@ -17,25 +17,28 @@ export const ProfilePage = () => {
   const [activeUserId, setActiveUserId] = useState() 
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState("");
+  const [profilePicture, setProfilePicture] = useState();
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
   const { state } = useLocation();
 
   useEffect(() => {
     if (token) {
-      getAllUserInfo(token)
-        .then((data) => {
-          setUser(data.user);
-          console.log(data.user);
-          setToken(data.token);
-          window.localStorage.setItem("token", data.token);
-        })
-        .catch((err) => {
-          console.err(err);
-          console.log(err);
+        getAllUserInfo(token)
+            .then((data) => {
+            setUser(data.user);
+            setToken(data.token);
+            window.localStorage.setItem("token", data.token);
+            if (data.user.profile_picture) {
+                fetchImage(data.user.profile_picture);
+            }
+            })
+    .catch((err) => {
+        console.error(err);
+        console.log(err)
         });
     }
-  }, []);
+}, []);
 
   const getUsersPosts = (posts, pageUserId) => {
     console.log(pageUserId)
@@ -98,11 +101,22 @@ export const ProfilePage = () => {
     return;
   }
 
+  const fetchImage = async (imageName) => {
+    try {
+        // this makes a request to the server to fetch the image
+        const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+        const blob = await response.blob();
+        setProfilePicture(URL.createObjectURL(blob));
+    } catch (error) {
+        console.error('Error fetching image:', error);
+    }
+};
+
   return (
     <div className="profilepage">
       <Navbar />
       <div className="bio-box">
-        <div className="bio-header"><h2>About Me</h2><div className='profile-pic-container'><img className="bio-profile-pic" src={user} /></div></div>
+        <div className="bio-header"><h2>About Me</h2><div class='profile-pic-container'><img class="bio-profile-pic" src={profilePicture} /></div></div>
         <hr></hr>
         <div className="profile-bio">
           <p>
@@ -111,8 +125,8 @@ export const ProfilePage = () => {
         </div>
       </div>
       {/* profile nav bar - (posts, liked_posts) */}
-      <div className="feed-selector-container">
-        <div className ="feed-selector-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
+      <div class="feed-selector-container">
+        <div class ="feed-selector-button-container"><ProfileFeedSelector feed={feed} setFeed={setFeed} />
       </div>
       <div className="feed" role="feed">
         {posts.toReversed().map((post) => (
