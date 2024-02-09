@@ -17,6 +17,7 @@ export const ProfilePage = () => {
   const [activeUserId, setActiveUserId] = useState() 
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState("");
+  const [profilePicture, setProfilePicture] = useState();
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
   const { state } = useLocation();
