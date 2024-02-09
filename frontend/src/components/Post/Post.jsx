@@ -18,7 +18,11 @@ export const Post = (props) => {
   const [viewComment, setCommentSection] = useState(false);
   const [likes, setLikes] = useState(props.post.likes);
   const [username, setUsername] = useState()
+  const [image, setImage] = useState();
+  const [profilePicture, setProfilePicture] = useState();
+  const [user, setUser] = useState([]);
   const navigate = useNavigate();
+
   const getPostById = (data, post_id) => {
     const comments = data.comments.filter((comment) => comment.post_id == post_id)
     setComments(comments)
@@ -47,6 +51,9 @@ export const Post = (props) => {
       getUserDataByUserId(token, props.post.user_id)
         .then((data) => {
           setUsername(data.user.username)
+          if (data.user.profile_picture) {
+              fetchProfileImage(data.user.profile_picture);
+          }
         })
 
 
@@ -55,14 +62,58 @@ export const Post = (props) => {
           getPostById(data, props.post._id)
           setToken(data.token);
           window.localStorage.setItem("token", data.token);
+          if (props.post.image) {
+            fetchPostImage(props.post.image)
+          }
         })
         .catch((err) => {
-          console.err(err);
+          console.error(err);
         });
     } else {
       navigate("/posts");
     }
   }, []);
+
+//   useEffect(() => {
+//     if (token) {
+//         getAllUserInfo(token)
+//             .then((data) => {
+//             setUser(data.user);
+//             setToken(data.token);
+//             window.localStorage.setItem("token", data.token);
+//             if (data.user.profile_picture) {
+//                 fetchProfileImage(data.user.profile_picture);
+//             }
+//             })
+//     .catch((err) => {
+//         console.error(err);
+//         console.log(err)
+//         });
+//     }
+// }, []);
+
+  const fetchPostImage = async (imageName) => {
+    try {
+        // this makes a request to the server to fetch the image
+        const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+        const blob = await response.blob();
+        setImage(URL.createObjectURL(blob));
+    } catch (error) {
+        console.error('Error fetching image:', error);
+    }
+  };
+
+  const fetchProfileImage = async (imageName) => {
+    try {
+        // this makes a request to the server to fetch the image
+        const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+        const blob = await response.blob();
+        setProfilePicture(URL.createObjectURL(blob));
+    } catch (error) {
+        console.error('Error fetching image:', error);
+    }
+};
+
 
   if (!token) {
     return;
@@ -77,19 +128,32 @@ export const Post = (props) => {
 
     <div className="feedPostSingle">
 
-        <div className="profilePhoto">
-          <img className="profileIconFeed" src="src/assets/profile.png" onClick={handleClickOnPost}/>
-          {props.user_id == props.post.user_id && <button onClick={handleClickDelete}>delet</button> }
-          <div className="spanText">
-            <span onClick={handleClickOnPost}> {username} </span>
-            <div className="datePost"><h6>{props.date}</h6></div>
-          </div>
+      <div className="profilePhoto">
+        <img className="profileIconFeed" src={profilePicture} onClick={handleClickOnPost}/>
+      <div/>
+      {/* {props.user_id == props.post.user_id && <button onClick={handleClickDelete}>delet</button> }
+      {props.user_id == props.post.user_id && 
+      <input onClick={handleClickDelete} type="image" src="src/assets/menu.png" alt="Menu icon" multiple/>  } */}
+
+      
+      <div className="username-date-added">
+      <div className="spanText">
+        
+          <span className="userName" onClick={handleClickOnPost}> {username} </span>
+        
+        
+          <span className="datePost"> {props.date} </span>
+        
         </div>
+      </div>
+
+    </div>
 
 
         <p className="messagePost">
-            <article key={props.post._id}>{props.post.message}</article>
+            <span key={props.post._id}>{props.post.message}</span>
         </p>
+        <div><img className="post-image" src={image} /></div>
 
 
     </div>  

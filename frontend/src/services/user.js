@@ -79,4 +79,6 @@ export const updateUsersLike = async (token, post_id, status) => {
         throw new Error("Unable to add post to user like list");
     }
 
-}
+    // const data = await response.json()
+    // return data;
+};

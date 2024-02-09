@@ -14,11 +14,6 @@
 
 .nav-box{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--collor-gray);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
 }
 
 
@@ -26,45 +21,77 @@
     background-color: var(--collor-blue);
     color: var(--collor--white);
     position: fixed; 
+    align-items: center;
     top: 0; 
     left: 0; 
     width: 100%; 
-    display: flex; 
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px; 
+    z-index: 10 
 }
 
 .left-header{
     width: 50%;
     text-align: left;
     margin: 10px;
+}   
+
+.logo{
+    margin-top: 10px;
+    margin-left: 2%;
 
 }
 
 .logo-home{
-    background-color: var(--color-blue);
     color: var(--collor--white);
-    border: none;
-    width: 20%;
     font-size: 2.5rem;
+    font-weight: bold;
     transition: .2s;
     margin-bottom: 0;
+    margin-top: -10px;
+    margin-left: 2%;
     padding: 10px 10px; 
+    cursor: pointer;
+}
+
+.buttons{
+    margin-top: -10px;
+    margin-left: 30%;
+
+}
+
+.btnHeader-profile,
+.btnHeader-account,
+.btnHeader-logout {
+    width: calc((50% - 40px) / 3);
+    height: 20px;
+    margin-top: -10px;
+    margin-left: 2%;
+    color: var(--color-white);
+    font-size: 20px;
+    transition: .2s;
     cursor: pointer;
     display: inline-block;
 }
 
-.user-greeting{
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    text-align: center;
-    font-size: 28px;
-}
+
 
 .right-header{
     width: 50%;
     text-align: right;
     margin: 10px;
 
+}
+
+.user-greeting{
+    width: 200px;
+    display: inline-block;
+    font-size: 30px;
+    color: var(--collor--white);
+    margin-top: -90px;
+    margin-right: 3%;
+    
 }
 
 .photo-profile{
@@ -78,19 +105,7 @@
     line-height: 36px;
     font-size: 28px;
     cursor: pointer;
-
-}
-
-
-.btnHeader-profile,
-.btnHeader-account,
-.btnHeader-logout {
-    width: calc((40% - 60px) / 3);
-    height: 20px;
-    color: var(--color-white);
-    font-size: 1.5rem;
-    transition: .2s;
-    cursor: pointer;
-    display: inline-block;
-}
+    margin-right: 80px;
+    }
+    
 

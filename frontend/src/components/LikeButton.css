@@ -11,20 +11,17 @@
     --collor-green2: #36a420;
 }
 
-.likeContainer span{
-    font-size: 20px;
-    color: var(--collor-gray4);
-    margin: 10px 5px;
-}
-.likeContainer {
-    display: flex; /* Define um layout flexível */
-    align-items: center; /* Alinha os itens verticalmente */
+.likeContainer{
+    display: flex; 
+    align-items: center; 
+    width: calc(90% - 40px);
+    margin: 0 -11px;
 }
 
-.likeContainer input {
-    margin-right: 5px; /* Adiciona uma margem direita entre a imagem e o span */
-}
 
-.likeContainer span {
-    align-self: center; /* Alinha o span verticalmente ao centro */
+.countLike{
+    font-size: 18px;
+    padding: 10px;
+    color: var(--collor-blue);
+    font-weight: bold;
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getPosts } from "../../services/posts.js";
-import { getId } from "../../services/users.js";
+import { getId } from "../../services/user.js";
 import "./ProfilePage.css";
 import Post from "../../components/Post/Post.jsx";
 import ProfileFeedSelector from "../../components/Profile/ProfileFeedSelector.jsx";
@@ -94,6 +94,9 @@ export const ProfilePage = () => {
         {posts.toReversed().map((post) => (
           <Post post={post} key={post._id} date={post.time_of_post} user_id={activeUserId} />
         ))}
+        </div>
+        <div className="credits">
+          <a href="https://www.flaticon.com/free-icons/heart"></a>
         </div>
     </div>
   );

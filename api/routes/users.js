@@ -12,6 +12,7 @@ const logReq = (req) => {
 router.post("/", UsersController.create);
 router.get("/id", tokenChecker, UsersController.getId);
 router.get("/", tokenChecker, UsersController.getAllUserInfo);
+router.patch("/",tokenChecker, UsersController.updateUserInfo);;
 router.patch("/like", tokenChecker, UsersController.updateUsersLikedPost)
 
 module.exports = router;

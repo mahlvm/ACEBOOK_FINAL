@@ -9,7 +9,11 @@ const getAllPosts = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const postObject = {message: req.body.message, time_of_post: req.body.datetime, user_id: req.user_id}
+  const postObject = {
+    message: req.body.message, 
+    image: req.body.image, 
+    time_of_post: req.body.datetime, 
+    user_id: req.user_id}
   const post = new Post(postObject);
   post.save();
 

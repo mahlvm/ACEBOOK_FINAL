@@ -20,20 +20,18 @@
 }
 
 
-
 .profileIconFeed {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin-right: 10px
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 15px;
 }
 
 
 .profilePhoto{
     display: flex;
-    align-items: flex-start;
-    margin: 10px 30px;
+    margin: -5px 20px;
 }
 
 
@@ -41,21 +39,37 @@
     font-size: 20px;
     color: var(--collor-gray4);
     display: flex;
-    margin: 0;
+    margin: 1px 20px;
+}
+
+
+.userName{
+    font-size: 18px;
+    color: var(--collor-gray4);
+    display: flex;
+    margin: 5px 14px;
 }
 
 .datePost{
-    font-size: 15px;
-    color: var(--collor-gray4);
+    margin: 31px -83px;
+    font-size: 12px;
+    color: var(--collor-gray3);
+    font-weight: bold;
     display: flex; 
+
+}
+
+.username-date-added{
+    display: flex;
+    margin: 10px 10px;
 }
 
 .messagePost{
     font-size: 18px;
     color: var(--collor-gray4);
     display: flex;
-    margin: 10px 30px;
     text-align: left;
+    margin: 0px 27px;
 }
 
 .actions {
@@ -70,5 +84,10 @@
 }
 
 
-
-
+.post-image {
+    display: center;
+    border-radius: 5px;
+    width: 500px;
+    padding: 5px;
+    padding-top: 10px;
+}
