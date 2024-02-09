@@ -3,37 +3,39 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../services/posts.js";
-import { getId } from "../../services/users.js";
+import { getId } from "../../services/user.js";
 import "./ProfilePage.css";
 import Post from "../../components/Post/Post.jsx";
 import ProfileFeedSelector from "../../components/Profile/ProfileFeedSelector.jsx";
 
 import { getAllUserInfo } from "../../services/user.js";
-import ang from '../../assets/ang_profile.jpeg';
 
 export const ProfilePage = () => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userId, setUserId] = useState("");
-  const [user, setUser] = useState("");
+  const [profilePicture, setProfilePicture] = useState();
+  const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   let [feed, setFeed] = useState("Posts");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      getAllUserInfo(token)
-        .then((data) => {
-          setUser(data.user);
-          console.log(data.user);
-          setToken(data.token);
-          window.localStorage.setItem("token", data.token);
-        })
-        .catch((err) => {
-          console.err(err);
-          console.log(err);
+        getAllUserInfo(token)
+            .then((data) => {
+            setUser(data.user);
+            setToken(data.token);
+            window.localStorage.setItem("token", data.token);
+            if (data.user.profile_picture) {
+                fetchImage(data.user.profile_picture);
+            }
+            })
+    .catch((err) => {
+        console.error(err);
+        console.log(err)
         });
     }
-  }, []);
+}, []);
 
   const getUsersPosts = (posts, userId) => {
     console.log(userId);
@@ -89,11 +91,22 @@ export const ProfilePage = () => {
     return;
   }
 
+  const fetchImage = async (imageName) => {
+    try {
+        // this makes a request to the server to fetch the image
+        const response = await fetch(`http://localhost:3000/upload/${imageName}`);
+        const blob = await response.blob();
+        setProfilePicture(URL.createObjectURL(blob));
+    } catch (error) {
+        console.error('Error fetching image:', error);
+    }
+};
+
   return (
     <div className="profilepage">
       <Navbar />
       <div class="bio-box">
-        <div class="bio-header"><h2>About Me</h2><div class='profile-pic-container'><img class="bio-profile-pic" src={ang} /></div></div>
+        <div class="bio-header"><h2>About Me</h2><div class='profile-pic-container'><img class="bio-profile-pic" src={profilePicture} /></div></div>
         <hr></hr>
         <div class="profile-bio">
           <p>
