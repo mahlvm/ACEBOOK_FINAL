@@ -5,14 +5,43 @@ import './NewPostForm.css';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import { uploadPostImage } from "../../services/posts";
 
-
 const NewPostForm = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const token = window.localStorage.getItem("token");
   const [image, setImage] = useState();  
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
+    if (!image) {
+      handleSubmitWithoutImage()
+    }
+    else {
+      handleSubmitWithImage()
+    }
+  }
+
+  const handleSubmitWithoutImage = async () => {
+      let datetime = new Date().toLocaleString("en-GB")
+
+        let payload = {
+          message: message,
+          datetime: datetime,
+        };
+        console.log("I am the post payload:", payload)
+
+      fetch(`${BACKEND_URL}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      })
+        navigate("/posts");
+    };
+
+  const handleSubmitWithImage = async () => {
     let datetime = new Date().toLocaleString("en-GB")
 
       let payload = {
@@ -20,22 +49,20 @@ const NewPostForm = () => {
         datetime: datetime,
         image: image.name,
       };
-      console.log("I am the post payload:", payload)
 
+      fetch(`${BACKEND_URL}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(uploadPostImage(image))
+        navigate("/posts");
+    };
 
-    fetch(`${BACKEND_URL}/posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(uploadPostImage(image))
-    navigate("/posts");
-  };
-
-
+  
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
