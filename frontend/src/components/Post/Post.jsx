@@ -21,6 +21,7 @@ export const Post = (props) => {
   const [image, setImage] = useState();
   const [profilePicture, setProfilePicture] = useState();
   const [user, setUser] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const getPostById = (data, post_id) => {
@@ -73,6 +74,10 @@ export const Post = (props) => {
       navigate("/posts");
     }
   }, []);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+    };
 
 //   useEffect(() => {
 //     if (token) {
@@ -131,9 +136,7 @@ export const Post = (props) => {
       <div className="profilePhoto">
         <img className="profileIconFeed" src={profilePicture} onClick={handleClickOnPost}/>
       <div/>
-      {/* {props.user_id == props.post.user_id && <button onClick={handleClickDelete}>delet</button> }
-      {props.user_id == props.post.user_id && 
-      <input onClick={handleClickDelete} type="image" src="src/assets/menu.png" alt="Menu icon" multiple/>  } */}
+      
 
       
       <div className="username-date-added">
@@ -146,7 +149,16 @@ export const Post = (props) => {
         
         </div>
       </div>
-
+      <div >
+      {props.user_id == props.post.user_id && 
+            <input className="post-menu" onClick={handleDropdownToggle} type="image" src="src/assets/menu.png" alt="Menu icon"/>  }
+            
+                    <div
+                        className={`dropdown-menu post-dropdown ${isDropdownOpen ? 'show' : ''}`}
+                        aria-labelledby="navbarDropdown">
+                    <a className="btnHeader-profile" onClick={handleClickDelete}>Delete</a><hr/>
+                    </div>
+      </div>
     </div>
 
 
