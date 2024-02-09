@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-
+import "./FeedPage.css"
 import { getPosts } from "../../services/posts";
 import { getId } from "../../services/user"
 import Post from "../../components/Post/Post";
@@ -50,9 +50,8 @@ export const FeedPage = () => {
       <div className="header">
         <Navbar />
       </div>
-
-      <div className="bodyFeed">
-        <NewPostForm role="new-post"/>
+      <div class="bodyFeed">
+        <NewPostForm role="new-post" class="new-post"/>
         <div className="feedPost" role="feed">
           {posts.toReversed().map((post) => (
             <Post post={post} key={post._id} date={post.time_of_post} user_id={userId} image={post.image}/>
